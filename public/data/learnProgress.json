@@ -2,7 +2,7 @@
   {
     "siteId": "pwncollege",
     "titre": "Computing 101",
-    "image": "/public/img/as86.png",
+    "image": "../img/as86.png",
     "progress": "100%",
     "description": "Les ordinateurs gèrent une incroyable quantité de programmes. Ce dojo plonge dans les profondeurs de l'informatique.",
     "date": "11 septembre 2025"
@@ -10,7 +10,7 @@
   {
     "siteId": "pwncollege",
     "titre": "Linux Luminarium",
-    "image": "/public/img/linux.png",
+    "image": "../img/linux.png",
     "progress": "100%",
     "description": "Apprentissage de la ligne de commande Linux et concepts fondamentaux.",
     "date": "12 mai 2025"
@@ -18,7 +18,7 @@
   {
     "siteId": "pwncollege",
     "titre": "Playing With Programs",
-    "image": "/public/img/linux.png",
+    "image": "../img/linux.png",
     "progress": "5%",
     "description": "Jouer avec des programmes et interagir avec des scripts.",
     "date": "12 juin 2025"
@@ -26,7 +26,7 @@
   {
     "siteId": "rootme",
     "titre": "Challenges",
-    "image": "/public/img/linux.png",
+    "image": "../img/linux.png",
     "progress": "615 points",
     "description": "Différents challenges de cybersécurité sur la plateforme RootMe.",
     "date": "en cours..."
@@ -34,7 +34,7 @@
   {
     "siteId": "ciscoAcademy",
     "titre": "Introduction to Cybersecurity",
-    "image": "/public/img/cisco.png",
+    "image": "../img/cisco.png",
     "progress": "100%",
     "description": "Certificat Introduction à la Cybersécurité",
     "date": "4 juillet 2025",
@@ -43,7 +43,7 @@
   {
     "siteId": "ciscoAcademy",
     "titre": "Notions de base sur les réseaux",
-    "image": "/public/img/cisco.png",
+    "image": "../img/cisco.png",
     "progress": "100%",
     "description": "Commencez à apprendre les bases des réseaux informatiques et découvrez le fonctionnement des réseaux.",
     "date": "18 juillet 2025",
@@ -52,7 +52,7 @@
   {
     "siteId": "ciscoAcademy",
     "titre": "Équipements réseau et Configuration de base",
-    "image": "/public/img/cisco.png",
+    "image": "../img/cisco.png",
     "progress": "100%",
     "description": "Apprenez à identifier les composants matériels d'un réseau et à configurer des périphériques réseau de base.",
     "date": "en cours...",
@@ -61,7 +61,7 @@
   {
     "siteId": "ciscoAcademy",
     "titre": "Défense du réseau",
-    "image": "/public/img/cisco.png",
+    "image": "../img/cisco.png",
     "progress": "20%",
     "description": "Découvrez comment surveiller et sécuriser votre réseau et évaluer les alertes de sécurité.",
     "date": "en cours...",

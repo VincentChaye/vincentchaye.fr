@@ -1,7 +1,7 @@
 [
   {"id": "ciscoAcademy",
     "titre": "Cisco Networking Academy",
-    "image": "/public/img/cisco.png",
+    "image": "../img/cisco.png",
     "lien": "https://www.credly.com/users/vincent-chaye",
     "description": "Plateforme d'apprentissage en ligne par cisco",
     "statut": "En cours"
@@ -9,7 +9,7 @@
 {
     "id": "pwncollege",
     "titre": "pwn.college",
-    "image": "/public/img/pwn.college.png",
+    "image": "../img/pwn.college.png",
     "lien": "https://pwn.college/hacker/105994",
     "description": "Université de cybersécurité interactive créée par Arizona State. Accessible gratuitement, très orientée exploitation système et reverse engineering.",
     "statut": "En cours"
@@ -17,8 +17,8 @@
   {
     "id": "rootme",
     "titre": "RootMe",
-    "image": "/public/img/rootme.jpg",
-    "lien": "https://www.root-me.org/natil?lang=fr#12dda726ee539fbb6446dea42bbe85c0",
+    "image": "../img/rootme.jpg",
+    "lien": "https://www.root-me.org/natil?lang=fr",
     "description": "Plateforme d'entraînement aux défis de cybersécurité. Accès à des challenges en ligne dans plusieurs domaines (web, crypto, reverse, etc.).",
     "statut": "En cours"
   }
