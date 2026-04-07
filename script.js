@@ -16,7 +16,7 @@ function copyToClipboard(text, element) {
 
 async function fetchRootMeData() {
 	try {
-		const res = await fetch('/public/data/rootme-cache.json');
+		const res = await fetch('../data/rootme-cache.json');
 		if (!res.ok) return null;
 		const data = await res.json();
 		// Fichier vide = pas encore de données
@@ -143,7 +143,7 @@ async function loadCredlyBadge(wrap, badgeId, titre) {
 
 
 if (document.getElementById("experience-list")) {
-	fetch("/public/data/experiences.json")
+	fetch("public/data/experiences.json")
 		.then(response => response.json())
 		.then(data => {
 			const list = document.getElementById("experience-list");
@@ -199,8 +199,8 @@ if (document.getElementById("experience-list")) {
 
 if (document.getElementById("learn-list")) {
 	Promise.all([
-		fetch("/public/data/learnSites.json").then(res => res.json()),
-		fetch("/public/data/learnProgress.json").then(res => res.json())
+		fetch("../data/learnSites.json").then(res => res.json()),
+		fetch("../data/learnProgress.json").then(res => res.json())
 	])
 		.then(async ([sites, progress]) => {
 			const list = document.getElementById("learn-list");

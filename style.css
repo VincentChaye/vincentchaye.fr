@@ -9,7 +9,7 @@ body {
 	color: white;
 	margin: 0;
 	padding: 0;
-	background-image: url(/public/img/background.webp);
+	background-image: url(public/img/background.webp);
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -382,7 +382,7 @@ footer {
 
 @media (max-width: 678px) {
 	body {
-		background-image: url(/public/img/backgroudPortable.webp);
+		background-image: url(public/img/backgroudPortable.webp);
 	}
 
 	.container {
