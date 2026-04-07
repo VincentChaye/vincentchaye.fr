@@ -1,0 +1,29 @@
+[
+  {
+    "titre": "Alternant CNRS projet Terra Numerica",
+    "adresse": "250 Rue Albert Einstein, 06560 Valbonne",
+    "description": "Mon rôle est premièrement de développer les ateliers mathématiques et informatiques déjà existants en version web. De plus, j’anime les ateliers pour tout type de public.",
+    "date": "octobre 2023 - en cours",
+    "dateFin": "9999-12-31",
+    "logo": "public/img/Logo_CNRS.png",
+    "class": "cnrs"
+  },
+  {
+    "titre": "Membre du conseil administratif et entraineur du club MER (Montagne Escalade Rochelaise)",
+    "adresse": "La Rochelle",
+    "description": "J’étais, pendant mes années de lycée, membre du C.A. de mon club, ce qui m’a permis de porter plusieurs projets et de participer à des réunions importantes comme l’assemblée générale de la FFME de 2021. J’ai passé mon diplôme bénévole d’initiateur SAE. Ce qui m’a permis d’encadrer des cours pour enfants et adultes.",
+    "date": "septembre 2021 - juillet 2023",
+    "dateFin": "2023-07-31",
+    "logo": "public/img/Logo_MER.png",
+    "class": "mer"
+  },
+  {
+    "titre": "Animateur saisonnier centre périjeunesse",
+    "adresse": "5 Bis Rue du Châteaurenard, 17180 Perigny",
+    "description": "Animateur durant les vacances scolaires grâce à mon BAFA qualification surveillant de baignade.",
+    "date": "octobre 2021 - août 2023",
+    "dateFin": "2023-08-31",
+    "logo": "public/img/Logo_Centre.png",
+    "class": "centre"
+  }
+]

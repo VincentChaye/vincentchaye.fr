@@ -1,0 +1,467 @@
+
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>MongoDB R510</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+
+:root{
+  --bg:#ffffff;
+  --fg:#0f172a;
+  --muted:#64748b;
+  --accent:#2563eb;
+  --accent-ink:#ffffff;
+  --border:#e5e7eb;
+  --code:#f6f8fa;
+  --radius:12px;
+  --radius-sm:8px;
+  --shadow:0 6px 18px rgba(2,6,23,.06);
+}
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0b1220;
+    --fg:#e5e7eb;
+    --muted:#94a3b8;
+    --accent:#60a5fa;
+    --accent-ink:#0b1220;
+    --border:#1f2a44;
+    --code:#0f1a33;
+    --shadow:0 8px 22px rgba(2,6,23,.35);
+  }
+}
+
+html,body{height:100%}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font:16px/1.6 Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+.wrap{max-width:980px; margin:0 auto; padding:28px 18px 120px}
+
+h1,h2,h3,h4{scroll-margin-top:84px}
+h1{font-size:30px; margin:0 0 10px}
+h2{font-size:24px; margin:28px 0 12px; padding-top:8px; border-top:1px solid var(--border)}
+h3{font-size:19px; margin:16px 0 8px}
+h4{font-size:16px; margin:14px 0 6px; color:var(--muted)}
+
+.note{color:var(--muted)}
+.tag{
+  display:inline-block;
+  font-size:11.5px;
+  padding:2px 8px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:linear-gradient(180deg,#eef2ff, #e0e7ff);
+  color:#3730a3;
+  margin-right:6px;
+}
+
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+::selection{background:rgba(37,99,235,.18)}
+
+.toc{
+  background:linear-gradient(180deg, rgba(37,99,235,.06), transparent 60%);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:14px 16px;
+  box-shadow:var(--shadow);
+}
+.toc ul{margin:6px 0 6px 20px; padding:0}
+.toc li{margin:4px 0}
+
+code, pre{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size:13.5px;
+}
+pre{
+  background:var(--code);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:12px 14px;
+  overflow:auto;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+}
+pre code{white-space:pre}
+
+textarea{
+  width:100%;
+  min-height:150px;
+  padding:12px 14px;
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  background:var(--bg);
+  color:var(--fg);
+  outline:none;
+  transition:border-color .15s ease, box-shadow .15s ease;
+}
+textarea:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 24%, transparent);
+}
+.out{
+  white-space:pre-wrap;
+  word-break:break-word;
+  background:var(--code);
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:12px 14px;
+  min-height:120px;
+}
+
+.btn{
+  appearance:none;
+  border:1px solid var(--border);
+  background:var(--bg);
+  color:var(--fg);
+  padding:8px 12px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:13px;
+  transition:transform .06s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.btn:hover{
+  border-color:var(--accent);
+  box-shadow:0 3px 12px rgba(2,6,23,.08);
+}
+.btn:active{transform:translateY(1px)}
+.btn.primary{
+  background:var(--accent);
+  color:var(--accent-ink);
+  border-color:var(--accent);
+}
+.btn.primary:hover{
+  box-shadow:0 6px 18px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+:target{
+  scroll-margin-top:84px;
+}
+:target + p,
+:target + pre,
+:target + div,
+:target{
+  animation:hi .9s ease 1;
+}
+@keyframes hi{
+  0%{box-shadow:0 0 0 0 rgba(37,99,235,.0)}
+  40%{box-shadow:0 0 0 6px color-mix(in srgb, var(--accent) 18%, transparent)}
+  100%{box-shadow:0 0 0 0 rgba(37,99,235,.0)}
+}
+
+.footer{
+  margin-top:28px;
+  padding-top:10px;
+  border-top:1px solid var(--border);
+  font-size:12.5px;
+  color:var(--muted);
+}
+
+@media (max-width: 720px){
+  .wrap{padding:24px 14px 90px}
+  h1{font-size:26px}
+  h2{font-size:22px}
+  pre, code{font-size:13px}
+}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>MongoDB R510 </h1>
+    <p class="note">Sommaire classique, explications “comment / ou / pourquoi” et exemples TD/TP, puis <a href="#fixer">Correcteur</a> integre.</p>
+
+    <div class="toc">
+      <strong>Sommaire</strong>
+      <ul>
+        <li><a href="#part1">Partie 1 — Commandes (.methods)</a>
+          <ul>
+            <li><a href="#find">.find</a> · <a href="#projection">Projection</a> · <a href="#operators">Operateurs</a></li>
+            <li><a href="#distinct">.distinct</a> · <a href="#countDocuments">.countDocuments</a></li>
+            <li><a href="#sort">.sort</a> · <a href="#limit">.limit</a> · <a href="#skip">.skip</a></li>
+            <li><a href="#insertOne">.insertOne</a> · <a href="#updateOne">.updateOne</a> · <a href="#updateMany">.updateMany</a> · <a href="#deleteMany">.deleteMany</a></li>
+          </ul>
+        </li>
+        <li><a href="#part2">Partie 2 — Aggregation</a>
+          <ul>
+            <li><a href="#agg-concepts">Concepts</a></li>
+            <li><a href="#stages">Stages</a> : <a href="#m">$match</a> · <a href="#u">$unwind</a> · <a href="#p">$project</a> · <a href="#g">$group</a> · <a href="#srt">$sort</a> · <a href="#lim">$limit</a> · <a href="#cnt">$count</a></li>
+            <li><a href="#exprs">Expressions</a> : $sum · $avg · $min · $max · $addToSet · $push · $size · $year · $month · $toDate · $divide</li>
+          </ul>
+        </li>
+        <li><a href="#fixer">Correcteur de commande</a></li>
+      </ul>
+    </div>
+
+    <h2 id="part1">Partie 1 — Commandes (.methods)</h2>
+    <h3 id="find">.find(query, projection?)</h3>
+    <p><span class="tag">comment</span> <code>db.collection.find(query, projection?)</code> — filtrer; paginer avec <code>.sort().limit().skip()</code>.</p>
+    <p><span class="tag">pourquoi</span> lire sans calcul.</p>
+<pre><code>// Manhattan avec une note &lt; 10, ne retourner que name + grades.score
+db.restaurants.find(
+  { "borough": "Manhattan", "grades.score": { "$lt": 10 } },
+  { "name": 1, "grades.score": 1, "_id": 0 }
+)</code></pre>
+
+    <h3 id="projection">Projection (2e param)</h3>
+<pre><code>{ "name": 1, "address.zipcode": 1, "_id": 0 }</code></pre>
+
+    <h3 id="operators">Operateurs</h3>
+<pre><code>// Comparaison, logique, tableaux
+{ "grades.score": { "$gt": 50 } }
+{ "$or": [ { "address.street": "Union Street" }, { "address.street": "Union Square" } ] }
+{ "grades": { "$elemMatch": { "grade": "A", "score": { "$lt": 10 } } } }</code></pre>
+
+    <h3 id="distinct">.distinct(field, query?)</h3>
+<pre><code>db.restaurants.distinct("cuisine")</code></pre>
+    <h3 id="countDocuments">.countDocuments(query)</h3>
+<pre><code>db.restaurants.countDocuments({ "cuisine": "French" })</code></pre>
+    <h3 id="sort">.sort(sortSpec)</h3>
+<pre><code>db.restaurants.find({}).sort({ "name": 1 })</code></pre>
+    <h3 id="limit">.limit(n)</h3>
+<pre><code>db.restaurants.find({}).limit(10)</code></pre>
+    <h3 id="skip">.skip(n)</h3>
+<pre><code>db.restaurants.find({}).skip(20).limit(10)</code></pre>
+    <h3 id="insertOne">.insertOne(doc)</h3>
+<pre><code>db.coll.insertOne({ "a": 1 })</code></pre>
+    <h3 id="updateOne">.updateOne(filter, update)</h3>
+<pre><code>db.restaurants.updateOne(
+  { "restaurant_id": "30075445" },
+  { "$set": { "address.zipcode": "10463" } }
+)</code></pre>
+    <h3 id="updateMany">.updateMany(filter, update)</h3>
+<pre><code>db.restaurants.updateMany(
+  { "grades.grade": { "$not": { "$eq": "C" } } },
+  { "$set": { "comment": "Ok" } }
+)</code></pre>
+    <h3 id="deleteMany">.deleteMany(filter)</h3>
+<pre><code>db.restaurants.deleteMany({ "borough": "Bronx", "cuisine": "Bakery" })</code></pre>
+
+    <h2 id="part2">Partie 2 — Aggregation</h2>
+
+    <h3 id="agg-concepts">Concepts</h3>
+<pre><code>db.restaurants.aggregate([
+  { "$match": { "borough": "Bronx" } },
+  { "$group": { "_id": "$cuisine", "total": { "$sum": 1 } } },
+  { "$sort": { "total": -1 } },
+  { "$limit": 5 }
+])</code></pre>
+
+    <h3 id="stages">Stages (comment / ou / pourquoi + exemple)</h3>
+    <h4 id="m">$match</h4>
+    <p><span class="tag">comment</span> meme syntaxe que find • <span class="tag">ou</span> debut de pipeline • <span class="tag">pourquoi</span> reduire le volume</p>
+<pre><code>{ "$match": { "borough": "Bronx" } }</code></pre>
+    <h4 id="u">$unwind</h4>
+    <p><span class="tag">comment</span> 1 element de tableau = 1 doc • <span class="tag">ou</span> avant $group sur un tableau</p>
+<pre><code>{ "$unwind": "$grades" }</code></pre>
+    <h4 id="p">$project</h4>
+    <p><span class="tag">comment</span> selection/renommage/calcul • <span class="tag">pourquoi</span> faconner l entree du group/sort</p>
+<pre><code>{ "$project": { "name": 1, "date": "$grades.date", "grade": "$grades.grade" } }</code></pre>
+    <h4 id="g">$group</h4>
+    <p><span class="tag">comment</span> _id + accumulateurs • <span class="tag">pourquoi</span> stats par categorie</p>
+<pre><code>{ "$group": { "_id": "$cuisine", "total": { "$sum": 1 } } }</code></pre>
+    <h4 id="srt">$sort</h4>
+<pre><code>{ "$sort": { "total": -1 } }</code></pre>
+    <h4 id="lim">$limit</h4>
+<pre><code>{ "$limit": 5 }</code></pre>
+    <h4 id="cnt">$count</h4>
+<pre><code>{ "$count": "n" }</code></pre>
+
+    <h3 id="exprs">Expressions</h3>
+<pre><code>{ "$sum": 1 }
+{ "$avg": "$grades.score" }
+{ "$addToSet": "$restaurant_id" }
+{ "$push": "$grades.grade" }
+{ "$year": "$grades.date" }
+{ "$divide": ["$Population", 1000000] }
+{ "$size": "$restos" }</code></pre>
+
+    <div class="footer">Fiche fusion: contenu complet + correcteur integre.</div>
+  </div>
+  <div class="wrap" id="fixer">
+    <h2>Correcteur de commande Mongo</h2>
+    <textarea id="cmd-in" spellcheck="false" placeholder='ex: db.restaurants.agregate([{ $match { borough:Bronx "cuisine":Bakery } { $unwind "$grades" } { $project { name:1 "grade":$grades.grade "score":$grades.score } } { $group { _id:"$name" avg:{ $avg $grades.score } notes:{ $push $grades.grade } } } { $sort { avg:-1 } } { $limit 5 }])'></textarea>
+    <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+      <button class="btn primary" id="btn-fix">Corriger</button>
+      <button class="btn" id="btn-copy">Copier le resultat</button>
+    </div>
+    <div id="cmd-out" class="out" style="margin-top:10px">// resultat corrige ici</div>
+
+    
+  </div>
+
+  
+<script>
+(function(){
+  "use strict";
+
+  // helper: dom
+  const $ = (sel, root=document) => root.querySelector(sel);
+
+  // 1) normalisations neutres (pas de correction semantique)
+  function dq(s){ return s.replace(/[“”«»]/g,'"').replace(/[‘’]/g,"'"); }
+  function strip(s){ return s.replace(/\/\/[^\n\r]*/g,"").replace(/\/\*[\s\S]*?\*\//g,""); }
+  function iso(s){ return s.replace(/ISODate\((['"])(.*?)\1\)/g,'"$2"'); }
+
+  // 2) ne jamais laisser une virgule juste avant } ou ]
+  function noTrailingComma(s){
+    return s.replace(/,(\s*[\]}])/g,"$1");
+  }
+
+function removeExtraClosers(s){
+  let h = s;
+
+  const openC=(h.match(/\{/g)||[]).length, closeC=(h.match(/\}/g)||[]).length;
+  const openS=(h.match(/\[/g)||[]).length, closeS=(h.match(/\]/g)||[]).length;
+  const openP=(h.match(/\(/g)||[]).length, closeP=(h.match(/\)/g)||[]).length;
+
+  if(closeC>openC){
+    let n=closeC-openC, a=h.split("");
+    for(let i=a.length-1;i>=0 && n>0;i--){ if(a[i]==='}'){ a[i]=''; n--; } }
+    h=a.join("");
+  }
+  if(closeS>openS){
+    let n=closeS-openS, a=h.split("");
+    for(let i=a.length-1;i>=0 && n>0;i--){ if(a[i]===']'){ a[i]=''; n--; } }
+    h=a.join("");
+  }
+  // NEW: retirer ) surnumeraires en fin de chaine
+  if(closeP>openP){
+    let n=closeP-openP, a=h.split("");
+    for(let i=a.length-1;i>=0 && n>0;i--){ if(a[i]===')'){ a[i]=''; n--; } }
+    h=a.join("");
+  }
+  return h;
+}
+
+// NEW: compresser les parentheses redondantes juste avant { ou [
+function compressParensBeforeLiteral(s){
+  // ex: "find(({ {...} ))" -> "find({ {...} ))"
+  // boucle jusqu'a stabilisation, sans toucher aux contenus
+  let h = s, prev;
+  do{
+    prev = h;
+    h = h.replace(/\(\s*\(\s*(?=[{\[])/g, '(');
+  }while(h !== prev);
+  return h;
+}
+
+
+  // 4) equilibrage des fermants manquants (accolades, crochets, parentheses)
+  function balanceClosers(s){
+    let h=s;
+    const openC=(h.match(/\{/g)||[]).length, closeC=(h.match(/\}/g)||[]).length;
+    const openS=(h.match(/\[/g)||[]).length, closeS=(h.match(/\]/g)||[]).length;
+    if(openC>closeC) h += "}".repeat(openC-closeC);
+    if(openS>closeS) h += "]".repeat(openS-closeS);
+    const openP=(h.match(/\(/g)||[]).length, closeP=(h.match(/\)/g)||[]).length;
+    if(openP>closeP) h += ")".repeat(openP-closeP);
+    return h;
+  }
+
+function addSafeCommas(s){
+  // cas A: entre deux paires k/v simples
+  s = s.replace(
+    /("[$A-Za-z_][\w$.]*"\s*:\s*[^,{}\[\]]+)\s+("[$A-Za-z_][\w$.]*"\s*:)/g,
+    '$1, $2'
+  );
+  // cas B: entre un objet/array ferme et une cle suivante
+  s = s.replace(
+    /(\}|\])\s+("[$A-Za-z_][\w$.]*"\s*:)/g,
+    '$1, $2'
+  );
+  // cas C: deux objets accolés dans un tableau ou pipeline
+  s = s.replace(
+    /\}\s*\{/g,
+    '}, {'
+  );
+  // cas D: cle/valeur accolées sans virgule a l’intérieur d’un objet
+  s = s.replace(
+    /("[$A-Za-z_][\w$.]*"\s*:\s*[^,{}\[\]]+)\s+("[$A-Za-z_][\w$.]*"\s*:\s*)/g,
+    '$1, $2'
+  );
+  // cas E: entre } ou ] et un [ ou { suivant (pipeline, array imbriques)
+  s = s.replace(
+    /(\}|\])\s+(\[|\{)/g,
+    '$1, $2'
+  );
+  // cas F: forcer la virgule au meme niveau (manque entre objets/arrays)
+  s = s.replace(
+    /(\}|\])(\s*)(\{|\[)/g,
+    '$1,$2$3'
+  );
+  // cas G: nettoyage des parentheses surnumeraires
+  s = s.replace(/\)\)+/g, ')');
+  s = s.replace(/\]\]+/g, ']');
+  return s;
+}
+
+
+
+
+
+  // 6) ne pas corriger les noms de methodes, ni les cles, ni les operateurs:
+  //    on se limite a quotes/virgules/brackets/parentheses.
+  function normalize(s){
+    s = dq(s);
+    s = strip(s);
+    s = iso(s);
+    return s;
+  }
+
+function fixCommand(cmd){
+  let s = dq(cmd).trim();
+  s = normalize(s);
+
+  // securite: enlever les virgules avant fermants avant tout
+  s = noTrailingComma(s);
+
+  // d’abord compresser (( juste avant { ou [
+  s = compressParensBeforeLiteral(s);
+
+  // ensuite uniquement les virgules “safe”
+  s = addSafeCommas(s);
+
+  // retirer les fermants surnumeraires (fin) puis equilibrer
+  s = removeExtraClosers(s);
+  s = balanceClosers(s);
+
+  // post-securite: si on a insere des virgules juste avant un fermant
+  s = noTrailingComma(s);
+  // et au cas ou l’equilibrage aurait encore laisse du surplus
+  s = removeExtraClosers(s);
+
+  return s;
+}
+
+
+
+
+  // wire UI
+  window.addEventListener('DOMContentLoaded', ()=>{
+    const inp = $('#cmd-in'), out = $('#cmd-out');
+    $('#btn-fix').onclick = function(){
+      const raw = inp.value;
+      if(!raw.trim()){ out.textContent='// vide'; return; }
+      out.textContent = fixCommand(raw);
+    };
+    $('#btn-copy').onclick = async function(){
+      try{
+        await navigator.clipboard.writeText(out.textContent);
+        const old = this.textContent; this.textContent='Copiee';
+        setTimeout(()=>this.textContent=old,1200);
+      }catch(e){}
+    };
+  });
+
+})();
+</script>
+
+
+</body>
+</html>

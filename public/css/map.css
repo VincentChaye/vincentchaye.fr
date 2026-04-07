@@ -1,0 +1,35 @@
+/*************/
+/* Variables */
+/*************/
+
+.map-container {
+	--city-radius: 2rem;
+	--city-sign-color-back: #00c080;
+	--city-sign-color-font: #fff;
+	--city-pin-size-font: 1.2rem;
+  }
+  
+  /**********/
+  /* Styles */
+  /**********/
+  
+  /* Container */
+  .map-container {
+	border-radius: 0.5em;
+	box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+	line-height: 1;
+	min-width: 15rem;
+	position: relative;
+	width: 50%;
+	aspect-ratio: 1;
+  }
+  
+  /* Map - Background */
+  .map-background {
+	border-radius: inherit;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+  }
+  

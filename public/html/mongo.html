@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>MongoDB – Ressource Page</title>
+	<style>
+		:root {
+			--bg: #0f1226;
+			--card: #171a34;
+			--muted: #aab3d1;
+			--accent: #7c5cff;
+			--accent-2: #26e0a0;
+			--code: #0c0f22;
+			--border: #242751;
+			--shadow: 0 10px 30px rgba(0, 0, 0, .35);
+			--radius: 18px;
+		}
+
+		* {
+			box-sizing: border-box
+		}
+
+		body {
+			margin: 0;
+			font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+			color: #e8ecff;
+			background:
+				radial-gradient(1200px 600px at 10% -10%, rgba(124, 92, 255, .25), transparent 60%),
+				radial-gradient(1200px 600px at 110% 10%, rgba(38, 224, 160, .12), transparent 60%),
+				var(--bg);
+			line-height: 1.45;
+		}
+
+		header {
+			padding: 38px 20px 20px;
+			text-align: center;
+		}
+
+		h1 {
+			margin: 0 0 8px;
+			font-size: clamp(1.5rem, 2.2vw + 1rem, 2.6rem);
+			letter-spacing: .2px;
+			font-weight: 800;
+			background: linear-gradient(90deg, #fff, #c8cdff);
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+		}
+
+		.subtitle {
+			color: var(--muted);
+			font-size: .98rem;
+		}
+
+		.toolbar {
+			margin: 22px auto 10px;
+			display: flex;
+			gap: 12px;
+			justify-content: center;
+			flex-wrap: wrap;
+		}
+
+		.search {
+			width: min(900px, 92vw);
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			background: linear-gradient(0deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .02));
+			border: 1px solid var(--border);
+			border-radius: 14px;
+			padding: 10px 14px;
+			box-shadow: var(--shadow);
+		}
+
+		.search input {
+			flex: 1;
+			background: transparent;
+			border: none;
+			outline: none;
+			color: #e8ecff;
+			font-size: 1rem;
+		}
+
+		.search small {
+			color: var(--muted)
+		}
+
+		.container {
+			width: min(1100px, 92vw);
+			margin: 14px auto 80px;
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+			gap: 16px;
+		}
+
+		.card {
+			background: linear-gradient(180deg, rgba(255, 255, 255, .02), rgba(255, 255, 255, .01));
+			border: 1px solid var(--border);
+			border-radius: var(--radius);
+			box-shadow: var(--shadow);
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+		}
+
+		.card:hover {
+			transform: translateY(-2px);
+			border-color: #2f3380;
+			box-shadow: 0 16px 34px rgba(10, 12, 30, .45);
+		}
+
+		.card-header {
+			padding: 14px 16px 10px;
+			border-bottom: 1px solid rgba(255, 255, 255, .06);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 10px;
+		}
+
+		.badge {
+			font-size: .75rem;
+			padding: 4px 10px;
+			border-radius: 999px;
+			background: linear-gradient(90deg, rgba(124, 92, 255, .2), rgba(124, 92, 255, .08));
+			border: 1px solid #3a2edd;
+			color: #d9d4ff;
+			white-space: nowrap;
+		}
+
+		.title {
+			font-size: 1rem;
+			font-weight: 700;
+			line-height: 1.3;
+		}
+
+		.card-body {
+			padding: 12px 16px 16px;
+		}
+
+		pre {
+			background: linear-gradient(180deg, rgba(12, 15, 34, .85), rgba(12, 15, 34, .9));
+			border: 1px solid #1f2246;
+			color: #d7defc;
+			padding: 12px 12px;
+			border-radius: 12px;
+			overflow: auto;
+			font-size: .92rem;
+			line-height: 1.4;
+			position: relative;
+		}
+
+		code {
+			font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+		}
+
+		.actions {
+			display: flex;
+			gap: 8px;
+			align-items: center;
+		}
+
+		.btn {
+			appearance: none;
+			border: none;
+			cursor: pointer;
+			padding: 8px 10px;
+			border-radius: 10px;
+			background: #222656;
+			color: #e8ecff;
+			font-weight: 600;
+			font-size: .85rem;
+			border: 1px solid #333a86;
+		}
+
+		.btn:hover {
+			filter: brightness(1.08)
+		}
+
+		.footer {
+			width: min(1100px, 92vw);
+			margin: 10px auto 40px;
+			color: var(--muted);
+			font-size: .9rem;
+			text-align: center;
+		}
+
+		.k {
+			color: #9ad7ff;
+			font-weight: 600;
+		}
+
+		.hidden {
+			display: none !important;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<h1>MongoDB – Example Page</h1>
+		<p class="subtitle">Toutes les <strong>questions</strong> avec leur <strong>requête</strong>, prêtes à
+			copier-coller.</p>
+		<div class="toolbar">
+			<div class="search">
+				<input id="q" placeholder="🔎 Rechercher (ex : Bronx, grade A, addToSet, zipcode…)" />
+				<small>Filtre en direct</small>
+			</div>
+		</div>
+	</header>
+
+	<main class="container" id="cards">
+		<!-- ===== TD1 ===== -->
+		<!-- 1 -->
+		<article class="card" data-tags="td1 manhattan score lt 10">
+			<div class="card-header">
+				<div class="title">TD1. Manhattan : noms + scores &lt; 10</div>
+				<span class="badge">TD1</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.find(
+  {"borough":"Manhattan","grades.score":{$lt:10}},
+  {"name":1,"grades.score":1,"_id":0}
+)</code></pre>
+			</div>
+		</article>
+
+		<!-- 2 -->
+		<article class="card" data-tags="td1 manhattan pas score gte 10 not">
+			<div class="card-header">
+				<div class="title">TD1. Manhattan : exclure score ≥ 10</div><span class="badge">TD1</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.find(
+  {"borough":"Manhattan","grades.score":{$lt:10,$not:{$gte:10}}},
+  {"name":1,"grades.score":1,"_id":0}
+)</code></pre>
+			</div>
+		</article>
+
+		<!-- 3 -->
+		<article class="card" data-tags="td1 grade c score lt 30">
+			<div class="card-header">
+				<div class="title">TD1. Grade "C" avec score &lt; 30</div><span class="badge">TD1</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.find(
+  {"grades.grade":"C","grades.score":{$lt:30}},
+  {"name":1,"grades.grade":1,"grades.score":1}
+)</code></pre>
+			</div>
+		</article>
+
+		<!-- 4 -->
+		<article class="card" data-tags="td1 distinct cuisine">
+			<div class="card-header">
+				<div class="title">TD1. Styles de cuisine (distinct)</div><span class="badge">TD1</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.distinct("cuisine")</code></pre>
+			</div>
+		</article>
+
+		<!-- 5 -->
+		<article class="card" data-tags="td1 distinct grades">
+			<div class="card-header">
+				<div class="title">TD1. Tous les grades possibles</div><span class="badge">TD1</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.distinct("grades.grade")</code></pre>
+			</div>
+		</article>
+
+		<!-- 6 -->
+		<article class="card" data-tags="td1 count french">
+			<div class="card-header">
+				<div class="title">TD1. Compter les restaurants "French"</div><span class="badge">TD1</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.countDocuments({cuisine:"French"})</code></pre>
+			</div>
+		</article>
+
+		<!-- 7 -->
+		<article class="card" data-tags="td1 count central avenue">
+			<div class="card-header">
+				<div class="title">TD1. Nombre de restos sur "Central Avenue"</div><span class="badge">TD1</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.find({"address.street":"Central Avenue"}).count()</code></pre>
+			</div>
+		</article>
+
+		<!-- 8 -->
+		<article class="card" data-tags="td1 count score gt 50">
+			<div class="card-header">
+				<div class="title">TD1. Nombre avec score &gt; 50</div><span class="badge">TD1</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.countDocuments({"grades.score":{$gt:50}})</code></pre>
+			</div>
+		</article>
+
+		<!-- 9 -->
+		<article class="card" data-tags="td1 projection nom immeuble rue">
+			<div class="card-header">
+				<div class="title">TD1. Lister (nom, immeuble, rue)</div><span class="badge">TD1</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.find({}, {name:1,"address.building":1,"address.street":1,_id:0})</code></pre>
+			</div>
+		</article>
+
+		<!-- 10 -->
+		<article class="card" data-tags="td1 burger king borough">
+			<div class="card-header">
+				<div class="title">TD1. Restaurants "Burger King" (nom + borough)</div><span class="badge">TD1</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.find({name:"Burger King"},{name:1,borough:1,_id:0})</code></pre>
+			</div>
+		</article>
+
+		<!-- 11 -->
+		<article class="card" data-tags="td1 union street union square in or">
+			<div class="card-header">
+				<div class="title">TD1. Rues "Union Street" ou "Union Square"</div><span class="badge">TD1</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.find({"address.street":{$in:["Union Street","Union Square"]}})</code></pre>
+			</div>
+		</article>
+
+		<!-- 12 -->
+		<article class="card" data-tags="td1 latitude coord index">
+			<div class="card-header">
+				<div class="title">TD1. Latitude &gt; 40.90</div><span class="badge">TD1</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.find({"address.coord.1":{$gt:40.90}})</code></pre>
+			</div>
+		</article>
+
+		<!-- 13 -->
+		<article class="card" data-tags="td1 score 0 grade a">
+			<div class="card-header">
+				<div class="title">TD1. Score = 0 et grade "A"</div><span class="badge">TD1</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.find({"grades.score":0,"grades.grade":"A"})</code></pre>
+			</div>
+		</article>
+
+		<!-- 14 -->
+		<article class="card" data-tags="td1 geoWithin box 2dsphere index">
+			<div class="card-header">
+				<div class="title">TD1. Zone géo (box) : index + requête</div><span class="badge">TD1</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier (2 lignes)</button></div>
+				<pre><code>db.restaurants.createIndex({"address.coord.coordinates":"2dsphere"})
+db.restaurants.find({
+  "address.coord":{$geoWithin:{$box:[[-74.2,40.2],[-74.5,40.5]]}}
+})</code></pre>
+			</div>
+		</article>
+
+		<!-- ===== TD2 ===== -->
+		<article class="card" data-tags="td2 update set comment not eq c">
+			<div class="card-header">
+				<div class="title">TD2. Ajouter comment "Ok" si pas de grade C</div><span class="badge"
+					style="background:linear-gradient(90deg, rgba(38,224,160,.2), rgba(38,224,160,.08)); border-color:#1fb985;">TD2</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.updateMany(
+  {"grades.grade":{$not:{$eq:"C"}}},
+  {$set:{comment:"Ok"}}
+)</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td2 deleteMany note 0">
+			<div class="card-header">
+				<div class="title">TD2. Supprimer restaurants note = 0</div><span class="badge">TD2</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.deleteMany({"note":0})</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td2 aggregate group cuisine bronx sort">
+			<div class="card-header">
+				<div class="title">TD2. #restos par cuisine (Bronx, tri croissant)</div><span class="badge">TD2</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.aggregate([
+  {$match:{borough:"Bronx"}},
+  {$group:{_id:"$cuisine",totalRestaurants:{$sum:1}}},
+  {$sort:{totalRestaurants:1}}
+])</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td2 find sort limit bronx name">
+			<div class="card-header">
+				<div class="title">TD2. Top 5 noms (Bronx, A→Z)</div><span class="badge">TD2</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.find({borough:"Bronx"}).sort({name:1}).limit(5)</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td2 group zipcode count">
+			<div class="card-header">
+				<div class="title">TD2. #restos par zipcode</div><span class="badge">TD2</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.aggregate([
+  {$group:{_id:"$address.zipcode",totalRestaurants:{$sum:1}}}
+])</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td2 unwind project name date grade">
+			<div class="card-header">
+				<div class="title">TD2. Unwind grades → nom + date + grade</div><span class="badge">TD2</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.aggregate([
+  {$unwind:"$grades"},
+  {$project:{name:1,"grades.date":1,"grades.grade":1}}
+])</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td2 updateOne zipcode id">
+			<div class="card-header">
+				<div class="title">TD2. Set zipcode = "10463" (id=30075445)</div><span class="badge">TD2</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.updateOne(
+  {restaurant_id:"30075445"},
+  {$set:{"address.zipcode":"10463"}}
+)</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td2 deleteMany bronx bakery">
+			<div class="card-header">
+				<div class="title">TD2. Supprimer "Bakery" (Bronx)</div><span class="badge">TD2</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.deleteMany({borough:"Bronx",cuisine:"Bakery"})</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td2 insertOne toto titi">
+			<div class="card-header">
+				<div class="title">TD2. Insérer un document (exemple)</div><span class="badge">TD2</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.insertOne({"toto":"titi"})</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td2 soups projection">
+			<div class="card-header">
+				<div class="title">TD2. Soups : nom + borough</div><span class="badge">TD2</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.find({cuisine:"Soups"},{name:1,borough:1,_id:0})</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td2 count grade z">
+			<div class="card-header">
+				<div class="title">TD2. Nb de restos ayant eu un grade "Z"</div><span class="badge">TD2</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.countDocuments({"grades.grade":"Z"})</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td2 group borough count">
+			<div class="card-header">
+				<div class="title">TD2. #restos par borough</div><span class="badge">TD2</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.aggregate([
+  {$group:{_id:"$borough",total_restaurants:{$sum:1}}}
+])</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td2 top5 cuisines sort desc">
+			<div class="card-header">
+				<div class="title">TD2. Top 5 cuisines (NYC)</div><span class="badge">TD2</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.aggregate([
+  {$group:{_id:"$cuisine",count:{$sum:1}}},
+  {$sort:{count:-1}},
+  {$limit:5}
+])</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td2 grades stats avg min max">
+			<div class="card-header">
+				<div class="title">TD2. Par grade : n, avg, min, max</div><span class="badge">TD2</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.aggregate([
+  {$unwind:"$grades"},
+  {$group:{
+    _id:"$grades.grade",
+    count:{$sum:1},
+    avg_score:{$avg:"$grades.score"},
+    min_score:{$min:"$grades.score"},
+    max_score:{$max:"$grades.score"}
+  }}
+])</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td2 updateMany exists false comment a verifier">
+			<div class="card-header">
+				<div class="title">TD2. Ajouter comment "A vérifier" si pas d'évaluation</div><span
+					class="badge">TD2</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.updateMany(
+  {grades:{$exists:false}},
+  {$set:{comment:"A vérifier"}}
+)</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td2 chaines top10 group name">
+			<div class="card-header">
+				<div class="title">TD2. Top 10 chaînes (par nom)</div><span class="badge">TD2</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.aggregate([
+  {$group:{_id:"$name",count:{$sum:1}}},
+  {$sort:{count:-1}},
+  {$limit:10}
+])</code></pre>
+			</div>
+		</article>
+
+		<!-- ===== TD3 ===== -->
+		<article class="card" data-tags="td3 within geometry east count">
+			<div class="card-header">
+				<div class="title">TD3. Nb restos dans l'aire "east"</div><span class="badge"
+					style="background:linear-gradient(90deg, rgba(124,92,255,.2), rgba(38,224,160,.12)); border-color:#3542f0;">TD3</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.find({"address.coord":{$within:{$geometry:east}}}).count()</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td3 aire polygon within names">
+			<div class="card-header">
+				<div class="title">TD3. Noms des restos dans une aire (Polygon)</div><span class="badge">TD3</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier (2 blocs)</button></div>
+				<pre><code>var aire={ "type":"Polygon","coordinates":[[
+  [-73.991000,40.72000],[-73.991599,40.72599],
+  [-73.991599,40.72999],[-73.991000,40.72000]
+]]}</code></pre>
+				<pre><code>db.restaurants.find(
+  {"address.coord":{$within:{$geometry:aire}}},
+  {name:1,_id:0}
+)</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td3 years unwind project group sort">
+			<div class="card-header">
+				<div class="title">TD3. Lister toutes les années (grades)</div><span class="badge">TD3</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.aggregate([
+  {$unwind:"$grades"},
+  {$project:{year:{$year:"$grades.date"}}},
+  {$group:{_id:"$year"}},
+  {$sort:{_id:1}}
+])</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td3 count years unwind">
+			<div class="card-header">
+				<div class="title">TD3. #occurrences par année</div><span class="badge">TD3</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.aggregate([
+  {$unwind:"$grades"},
+  {$project:{year:{$year:"$grades.date"}}},
+  {$group:{_id:"$year",count:{$sum:1}}},
+  {$sort:{_id:1}}
+])</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td3 tuples année nb restos distincts inspections">
+			<div class="card-header">
+				<div class="title">TD3. (année, #restos distincts inspectés)</div><span class="badge">TD3</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.aggregate([
+  {$unwind:"$grades"},
+  {$project:{year:{$year:"$grades.date"},restaurant_id:"$restaurant_id"}},
+  {$group:{_id:{year:"$year"},restaurant_count:{$addToSet:"$restaurant_id"}}},
+  {$project:{year:"$_id.year",restaurant_count:{$size:"$restaurant_count"}}},
+  {$sort:{year:1}}
+])</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td3 max année plus de restos inspectés">
+			<div class="card-header">
+				<div class="title">TD3. Année avec le plus de restos inspectés</div><span class="badge">TD3</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.aggregate([
+  {$unwind:"$grades"},
+  {$project:{year:{$year:"$grades.date"},restaurant_id:"$restaurant_id"}},
+  {$group:{_id:{year:"$year"},restaurant_count:{$addToSet:"$restaurant_id"}}},
+  {$project:{year:"$_id.year",restaurant_count:{$size:"$restaurant_count"}}},
+  {$sort:{restaurant_count:-1}},
+  {$limit:1}
+])</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td3 rues addToSet gt 2 boroughs">
+			<div class="card-header">
+				<div class="title">TD3. Rues présentes dans &gt; 2 boroughs</div><span class="badge">TD3</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.aggregate([
+  {$group:{_id:"$address.street",boroughs:{$addToSet:"$borough"}}},
+  {$project:{street:"$_id",boroughCount:{$size:"$boroughs"}}},
+  {$match:{boroughCount:{$gt:2}}},
+  {$project:{_id:0,street:1}}
+])</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="td3 restaurants uniquement grades A addToSet">
+			<div class="card-header">
+				<div class="title">TD3. Restaurants avec uniquement des grades "A"</div><span class="badge">TD3</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.restaurants.aggregate([
+  {$group:{_id:"$name",gradesSet:{$addToSet:"$grades.grade"},allGrades:{$push:"$grades"}}},
+  {$match:{gradesSet:{$eq:["A"]}}},
+  {$project:{_id:0,restaurant_name:"$_id",grades:"$allGrades"}}
+])</code></pre>
+			</div>
+		</article>
+
+
+		<!-- ===== TP4 (World) ===== -->
+		<article class="card" data-tags="tp4 world count pays">
+			<div class="card-header">
+				<div class="title">TP4. Nombre exact de pays</div><span class="badge">TP4</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.world.countDocuments({})</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="tp4 world continents distinct">
+			<div class="card-header">
+				<div class="title">TP4. Liste des continents</div><span class="badge">TP4</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.world.distinct("Continent")</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="tp4 world france">
+			<div class="card-header">
+				<div class="title">TP4. Infos France</div><span class="badge">TP4</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.world.find({ Name: "France" })</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="tp4 world europe population lt 100000">
+			<div class="card-header">
+				<div class="title">TP4. Europe : pays &lt; 100000 hab.</div><span class="badge">TP4</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.world.find(
+  { Continent: "Europe", Population: { $lt: 100000 } },
+  { Name: 1, Population: 1, _id: 0 }
+)</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="tp4 world oceania independants">
+			<div class="card-header">
+				<div class="title">TP4. Océanie : pays indépendants</div><span class="badge">TP4</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.world.find(
+  { Continent: "Oceania", IndepYear: { $exists: true, $ne: null } },
+  { Name: 1, IndepYear: 1, _id: 0 }
+)</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="tp4 world plus gros continent surface aggregate group">
+			<div class="card-header">
+				<div class="title">TP4. Plus gros continent (surface)</div><span class="badge">TP4</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.world.aggregate([
+  { $group: { _id: "$Continent", surface: { $sum: "$SurfaceArea" } } },
+  { $sort: { surface: -1 } },
+  { $limit: 1 }
+])</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="tp4 world group continent population independants">
+			<div class="card-header">
+				<div class="title">TP4. Par continent : #pays, pop, #indép.</div><span class="badge">TP4</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.world.aggregate([
+  { $group: {
+    _id: "$Continent",
+    nbPays: { $sum: 1 },
+    popTotale: { $sum: "$Population" },
+    nbIndep: { $sum: { $cond: [ { $ifNull: ["$IndepYear", false] }, 1, 0 ] } }
+  }},
+  { $sort: { _id: 1 } }
+])</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="tp4 world france villes population sum">
+			<div class="card-header">
+				<div class="title">TP4. France : population des villes (total)</div><span class="badge">TP4</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.world.aggregate([
+  { $match: { Name: "France" } },
+  { $unwind: "$Cities" },
+  { $group: { _id: null, populationVilles: { $sum: "$Cities.Population" } } }
+])</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="tp4 world france capitale city population">
+			<div class="card-header">
+				<div class="title">TP4. Capitale de la France (nom + pop)</div><span class="badge">TP4</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.world.aggregate([
+  { $match: { Name: "France" } },
+  { $unwind: "$Cities" },
+  { $match: { "Cities.Capital": true } },
+  { $project: { _id: 0, City: "$Cities.Name", Population: "$Cities.Population" } }
+])</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="tp4 world langues plus de 15 pays">
+			<div class="card-header">
+				<div class="title">TP4. Langues parlées dans &gt; 15 pays</div><span class="badge">TP4</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.world.aggregate([
+  { $unwind: "$Languages" },
+  { $group: { _id: "$Languages.Language", pays: { $addToSet: "$Code" } } },
+  { $project: { _id: 0, Language: "$_id", nbPays: { $size: "$pays" } } },
+  { $match: { nbPays: { $gt: 15 } } },
+  { $sort: { nbPays: -1, Language: 1 } }
+])</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="tp4 world pays 100 villes nombre tri">
+			<div class="card-header">
+				<div class="title">TP4. Pays avec ≥ 100 villes (compte)</div><span class="badge">TP4</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.world.aggregate([
+  { $project: { Name: 1, cityCount: { $size: { $ifNull: ["$Cities", []] } } } },
+  { $match: { cityCount: { $gte: 100 } } },
+  { $sort: { cityCount: -1, Name: 1 } }
+])</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="tp4 world top 10 villes plus peuplees pays">
+			<div class="card-header">
+				<div class="title">TP4. Top 10 villes les plus peuplées (+ pays)</div><span class="badge">TP4</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.world.aggregate([
+  { $unwind: "$Cities" },
+  { $project: { _id: 0, Country: "$Name", City: "$Cities.Name", Population: "$Cities.Population" } },
+  { $sort: { Population: -1 } },
+  { $limit: 10 }
+])</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="tp4 world french langue officielle">
+			<div class="card-header">
+				<div class="title">TP4. Pays où le français est officiel</div><span class="badge">TP4</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.world.find(
+  { Languages: { $elemMatch: { Language: "French", IsOfficial: true } } },
+  { _id: 0, Name: 1 }
+)</code></pre>
+			</div>
+		</article>
+
+		<article class="card" data-tags="tp4 world top 5 plus de langues">
+			<div class="card-header">
+				<div class="title">TP4. Top 5 pays avec le plus de langues</div><span class="badge">TP4</span>
+			</div>
+			<div class="card-body">
+				<div class="actions"><button class="btn copy">Copier</button></div>
+				<pre><code>db.world.aggregate([
+  { $project: { Name: 1, langCount: { $size: { $ifNull: ["$Languages", []] } } } },
+  { $sort: { langCount: -1, Name: 1 } },
+  { $limit: 5 }
+])</code></pre>
+			</div>
+		</article>
+
+		
+
+
+
+
+	</main>
+
+	<div class="footer">
+		Astuce : utilise <span class="k">$match</span>, <span class="k">$group</span>, <span class="k">$project</span>
+		&amp; <span class="k">$sort</span> comme briques LEGO. Clique sur <strong>Copier</strong> pour coller direct
+		dans ton shell MongoDB.
+	</div>
+
+	<script>
+		// Copier le contenu du <pre> le plus proche
+		document.querySelectorAll('.btn.copy').forEach(btn => {
+			btn.addEventListener('click', (e) => {
+				const pre = e.target.closest('.card-body').querySelector('pre');
+				const text = pre.innerText.trim();
+				navigator.clipboard.writeText(text).then(() => {
+					const old = e.target.textContent;
+					e.target.textContent = "Copié ✓";
+					setTimeout(() => e.target.textContent = old, 900);
+				});
+			});
+		});
+
+		// Filtre temps réel
+		const input = document.getElementById('q');
+		input.addEventListener('input', () => {
+			const q = input.value.toLowerCase();
+			document.querySelectorAll('.card').forEach(card => {
+				const hay = (card.innerText + " " + (card.dataset.tags || "")).toLowerCase();
+				card.classList.toggle('hidden', !hay.includes(q));
+			});
+		});
+	</script>
+</body>
+
+</html>

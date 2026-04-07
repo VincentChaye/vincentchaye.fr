@@ -1,0 +1,35 @@
+name: Update Root-Me Stats
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # tous les jours à 6h UTC
+  workflow_dispatch:        # déclenchement manuel possible
+
+jobs:
+  fetch-rootme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Fetch Root-Me API
+        run: |
+          RESPONSE=$(curl -s \
+            -H "Accept: application/json" \
+            -H "Cookie: api_key=${{ secrets.ROOTME_API_KEY }}" \
+            "https://api.www.root-me.org/auteurs/${{ secrets.ROOTME_USER_ID }}?lang=fr")
+          # Ne mettre à jour le cache que si la réponse contient un score valide
+          if echo "$RESPONSE" | python3 -c "import json,sys; d=json.load(sys.stdin); sys.exit(0 if d.get('score') is not None else 1)" 2>/dev/null; then
+            echo "$RESPONSE" > public/data/rootme-cache.json
+          else
+            echo "API response invalid, skipping cache update"
+            exit 1
+          fi
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/data/rootme-cache.json
+          git diff --cached --quiet || git commit -m "chore: update Root-Me stats"
+          git push
