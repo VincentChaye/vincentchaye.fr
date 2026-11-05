@@ -1,118 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=0.8">
-	<title>VincentChaye</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Vincent Chaye — Alternant informatique</title>
+	<meta name="description" content="Portfolio de Vincent Chaye, alternant informatique.">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="public/css/buttonDownload.css">
-	<link rel="stylesheet" href="public/css/socialButton.css">
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
-<body>
-	<div class="container">
-		<header>
-			<nav>
-	<div class="menu-toggle" id="mobile-menu">
-		<span></span>
-		<span></span>
-		<span></span>
+<body class="is-locked">
+	<div class="bg-photo" aria-hidden="true"></div>
+	<canvas id="bg-canvas" aria-hidden="true"></canvas>
+	<div class="grain" aria-hidden="true"></div>
+
+	<!-- Écran d'intro -->
+	<div class="intro" id="intro">
+		<div class="intro-inner">
+			<span class="intro-the">The</span>
+			<h1 class="intro-title">Vincent<br>Chaye</h1>
+			<button class="enter-btn" id="enter-btn" type="button">Entrer</button>
+		</div>
 	</div>
-	<ul class="nav-list">
-		<li><a href="index.html">Home</a></li>
-		<li><a href="public/html/learn.html">Apprentissage</a></li>
-		<li><a href="https://vincentchaye.github.io/ZoneDeGrimpe/">Escalade</a></li>
-		<!--<li><a href="/public/html/mongo.html">TDNosql</a></li>
-		<li><a href="/public/html/r510.html">CoursNosql</a></li>-->
-	</ul>
-</nav>
 
-		</header>
-		<banner>
-			<h1>Vincent Chaye</h1>
-			<p>Alternant informatique</p>
-			<button class="button" onclick="window.location.href='public/download/CV-VincentChaye-2026.pdf'"
-				class="button">
-				<span class="button_lg">
-					<span class="button_sl"></span>
-					<span class="button_text">Download CV</span>
-				</span>
-			</button>
-		</banner>
-
-
-		<main>
-
-		</main>
-
-
-		<aside class="left-aside">
-			<ul class="wrapper">
-				<li class="icon mail" onclick="copyToClipboard('vincent.chaye@icloud.com', this)">
-					<span class="tooltip">Mail</span>
-					<svg viewBox="0 0 24 24" height="1.2em" fill="black" xmlns="http://www.w3.org/2000/svg">
-						<path
-							d="M21.4 6.6l-9.4 7.5L2.6 6.6C2.2 6.3 2 5.8 2 5.3V4.5C2 3.7 2.7 3 3.5 3h17c.8 0 1.5.7 1.5 1.5v.8c0 .5-.2 1-.6 1.3zM22 8.2l-10 8.1-10-8.1V18c0 .8.7 1.5 1.5 1.5h17c.8 0 1.5-.7 1.5-1.5V8.2z" />
-					</svg>
-				</li>
-				<li>
-
-				</li>
-
-				<li class="icon tel" onclick="copyToClipboard('0783661974', this)">
-					<span class="tooltip">Téléphone</span>
-					<svg role="img" viewBox="0 0 448 512" fill="black" xmlns="http://www.w3.org/2000/svg"
-						height="1.2em">
-						<title>WhatsApp</title>
-						<path
-							d="M400 0H48C21.49 0 0 21.49 0 48v416c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V48c0-26.51-21.49-48-48-48zM224 480c-26.51 0-48-21.49-48-48h96c0 26.51-21.49 48-48 48zm160-96H64V64h320v320z" />
-					</svg>
-				</li>
+	<header class="topbar">
+		<button class="round-btn" id="mobile-menu" type="button" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg></button>
+		<a class="brand" href="index.html">VINCENT CHAYE</a>
+		<a class="round-btn" href="public/download/CV-VincentChaye-2026.pdf" aria-label="Télécharger le CV" title="CV">
+			<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4">
+				<path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14" />
+			</svg>
+		</a>
+		<nav class="nav-panel" id="nav-panel">
+			<ul class="nav-list">
+				<li><a href="#hero">Accueil</a></li>
+				<li><a href="#apropos">À propos</a></li>
+				<li><a href="#experiences">Expériences</a></li>
+				<li><a href="#projets">Projets</a></li>
+				<li><a href="#formation">Formation</a></li>
+				<li><a href="#competences">Compétences</a></li>
+				<li><a href="public/html/learn.html">Apprentissage</a></li>
+				<li><a href="https://vincentchaye.github.io/ZoneDeGrimpe/">Escalade</a></li>
 			</ul>
-		</aside>
-		<aside class="right-aside">
+		</nav>
+	</header>
 
-			<ul class="wrapper">
-				<li class="icon linkedin" onclick="window.open('https://www.linkedin.com/in/vincentchayé', '_blank')">
-					<span class="tooltip">LinkedIn</span>
+	<main>
+		<section class="hero" id="hero">
+			<p class="chapter reveal">Chapitre un</p>
+			<h2 class="display reveal">
+				<em>Vincent</em>
+				<span>CHAYE</span>
+			</h2>
+			<p class="subtitle reveal">Élève-ingénieur cybersécurité · ESIEA<br>Alternant chez Thales Alenia Space</p>
+			<a class="text-link reveal" href="public/download/CV-VincentChaye-2026.pdf">Télécharger le CV</a>
+			<div class="scroll-hint reveal" aria-hidden="true"><span></span></div>
+		</section>
 
-					<svg viewBox="0 0 448 512" height="1.2em" fill="black" xmlns="http://www.w3.org/2000/svg">
-						<path
-							d="M100.28 448H7.4V148.9h92.88zm-46.44-340.2c-29.64 0-53.6-24-53.6-53.6S24.2 0 53.64 0s53.6 24 53.6 53.6-23.96 54.2-53.6 54.2zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.6V448h-92.78V148.9h89.16v40.8h1.3c12.4-23.4 42.6-48.3 87.7-48.3 93.8 0 111.1 61.7 111.1 141.9V448z" />
-					</svg>
+		<section class="about" id="apropos">
+			<p class="chapter reveal">Chapitre deux</p>
+			<h2 class="display small reveal"><em>À</em><span>PROPOS</span></h2>
+			<p class="lead reveal">Élève-ingénieur en cybersécurité à l'ESIEA (2026-2029) et alternant chez Thales Alenia Space, je suis passionné par les réseaux et par la cybersécurité, côté Blue Team comme Red Team, avec un fort appétit pour la gouvernance.</p>
+			<p class="lead reveal">Je m'entraîne sur Root-Me, Hack The Box et pwn.college, je suis membre du Sophia-Hack-Lab, et je prépare la certification Cisco CCST Cybersecurity.</p>
+			<ul class="facts reveal">
+				<li><b>Langues</b>Anglais (B2) · Allemand (A1)</li>
+				<li class="sport"><b>Sport</b>Escalade · Échecs · Ninja Warrior
+			<div class="video">
+				<div class="video-frame">
+					<iframe src="https://www.youtube-nocookie.com/embed/ppn174YfIXE" title="Ninja Warrior : ma participation" loading="lazy"
+						allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+				</div>
+				<p class="video-caption">Ma participation à Ninja Warrior · 2025</p>
+			</div>
 				</li>
-				<li class="icon github" onclick="window.open('https://github.com/VincentChaye', '_blank')">
-					<span class="tooltip">GitHub</span>
-					<svg height="1.2em" viewBox="0 0 16 16" fill="black" xmlns="http://www.w3.org/2000/svg">
-						<path fill-rule="evenodd"
-							d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2 .37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.001 8.001 0 0 0 16 8c0-4.42-3.58-8-8-8z">
-						</path>
-					</svg>
-				</li>
-				<li class="icon instagram" onclick="window.open('https://www.instagram.com/vincent.chaye/', '_blank')">
-					<span class="tooltip">Instagram</span>
-					<svg xmlns="http://www.w3.org/2000/svg" height="1.2em" fill="black" class="bi bi-instagram"
-						viewBox="0 0 16 16">
-						<path
-							d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z">
-						</path>
-					</svg>
-				</li>
+				<li><b>Créatif</b>Trompette · Pâtisserie</li>
+				<li><b>Diplômes</b>BAFA · Initiateur SAE · PSC1 · Permis B</li>
 			</ul>
-		</aside>
+		</section>
 
-		<section class="low-content">
-			<h3>Experiences</h3>
+		<section class="experiences" id="experiences">
+			<p class="chapter reveal">Chapitre trois</p>
+			<h2 class="display small reveal"><em>Les</em><span>EXPÉRIENCES</span></h2>
 			<ul id="experience-list"></ul>
 		</section>
 
-		<footer>
-			<p>&copy; 2026 VincentChaye</p>
-		</footer>
-	</div>
+		<section class="projects" id="projets">
+			<p class="chapter reveal">Chapitre quatre</p>
+			<h2 class="display small reveal"><em>Les</em><span>PROJETS</span></h2>
+			<ul id="project-list"></ul>
+			<a class="text-link reveal" href="https://github.com/VincentChaye?tab=repositories" target="_blank" rel="noopener">Tous mes projets sur GitHub</a>
+		</section>
+
+		<section class="formation" id="formation">
+			<p class="chapter reveal">Chapitre cinq</p>
+			<h2 class="display small reveal"><em>La</em><span>FORMATION</span></h2>
+			<ul class="timeline reveal">
+				<li><span class="when">2026 – 2029</span><b>ESIEA</b><i>Diplôme d'ingénieur, spécialité cybersécurité (alternance)</i></li>
+				<li><span class="when">2023 – 2026</span><b>IUT Nice-Sophia Antipolis</b><i>BUT Informatique, réalisation d'applications (alternance)</i></li>
+				<li><span class="when">2019 – 2023</span><b>Lycée Léonce Vieljeux, La Rochelle</b><i>Baccalauréat général, mention Bien (Maths, NSI, Maths expertes)</i></li>
+			</ul>
+		</section>
+
+		<section class="skills" id="competences">
+			<p class="chapter reveal">Chapitre six</p>
+			<h2 class="display small reveal"><em>Les</em><span>COMPÉTENCES</span></h2>
+			<div class="skill-grid reveal">
+				<div><h3>Défense &amp; analyse</h3><p>Wireshark · Cisco Packet Tracer · Bases SIEM / SOC · Threat intelligence · OSINT · Linux (hardening) · Windows</p></div>
+				<div><h3>Audit &amp; offensif</h3><p>Utilisation courante de Kali Linux Purple avec son jeu d'outils complet, en particulier pour l'audit de points d'accès sans fil (Wi-Fi) · Nmap · Burp Suite · Hydra · Hashcat · John the Ripper · x64dbg · IDA</p></div>
+				<div><h3>Développement</h3><p>Python · Bash · Rust · C/C++ · Assembleur x86 · JavaScript (React, Express, Vue) · TypeScript · HTML/CSS</p></div>
+				<div><h3>DevSecOps &amp; IA</h3><p>CI/CD · Docker · Pipelines RAG (LangChain, Ollama)</p></div>
+			</div>
+			<p class="chapter reveal certs">Certifications Cisco : Networking Basics · Networking Devices and Initial Configuration · Endpoint Security · CCST Cybersecurity (en cours)</p>
+		</section>
+
+		<section class="contact" id="contact">
+			<p class="chapter reveal">Chapitre sept</p>
+			<h2 class="display small reveal"><em>Me</em><span>CONTACTER</span></h2>
+			<ul class="contact-list reveal">
+				<li class="icon mail" role="button" tabindex="0" onclick="copyToClipboard('vincent.chaye@icloud.com', this)">
+					<span class="tooltip">Mail</span>
+					<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.4 6.6l-9.4 7.5L2.6 6.6C2.2 6.3 2 5.8 2 5.3V4.5C2 3.7 2.7 3 3.5 3h17c.8 0 1.5.7 1.5 1.5v.8c0 .5-.2 1-.6 1.3zM22 8.2l-10 8.1-10-8.1V18c0 .8.7 1.5 1.5 1.5h17c.8 0 1.5-.7 1.5-1.5V8.2z" /></svg>
+				</li>
+				<li class="icon linkedin" role="button" tabindex="0" onclick="window.open('https://www.linkedin.com/in/vincentchayé', '_blank')">
+					<span class="tooltip">LinkedIn</span>
+					<svg viewBox="0 0 448 512" fill="currentColor"><path d="M100.28 448H7.4V148.9h92.88zm-46.44-340.2c-29.64 0-53.6-24-53.6-53.6S24.2 0 53.64 0s53.6 24 53.6 53.6-23.96 54.2-53.6 54.2zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.6V448h-92.78V148.9h89.16v40.8h1.3c12.4-23.4 42.6-48.3 87.7-48.3 93.8 0 111.1 61.7 111.1 141.9V448z" /></svg>
+				</li>
+				<li class="icon github" role="button" tabindex="0" onclick="window.open('https://github.com/VincentChaye', '_blank')">
+					<span class="tooltip">GitHub</span>
+					<svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2 .37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.001 8.001 0 0 0 16 8c0-4.42-3.58-8-8-8z" /></svg>
+				</li>
+				<li class="icon instagram" role="button" tabindex="0" onclick="window.open('https://www.instagram.com/vincent.chaye/', '_blank')">
+					<span class="tooltip">Instagram</span>
+					<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" /></svg>
+				</li>
+			</ul>
+		</section>
+	</main>
+
+	<footer>
+		<p>&copy; 2026 Vincent Chaye</p>
+	</footer>
+
 	<script src="script.js"></script>
+	<script src="home.js"></script>
 </body>
 
 </html>

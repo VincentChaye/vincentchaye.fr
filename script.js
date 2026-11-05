@@ -159,25 +159,33 @@ if (document.getElementById("experience-list")) {
 				const li = document.createElement("li");
 				li.className = `experience ${exp.class} collapsed`;
 
+				const hasDesc = !!exp.description;
+				const visual = exp.logo
+					? `<img src="${exp.logo}" alt="Logo ${exp.class}" class="logo-${exp.class}">`
+					: `<span class="monogram" aria-hidden="true">${(exp.adresse || exp.titre).split(' ')[0].slice(0, 2).toUpperCase()}</span>`;
+
 				li.innerHTML = `
-					<img src="${exp.logo}" alt="Logo ${exp.class}" class="logo-${exp.class}">
+					${visual}
 					<div class="experience-text">
 						<h2>${exp.titre}</h2>
-						<p class="adresse">${exp.adresse}</p>
-						<p class="date">Date : ${exp.date}</p>
-						<p class="description" style="display: none;">${exp.description}</p>
-						<button class="toggle-button">Voir plus</button>
+						${exp.adresse ? `<p class="adresse">${exp.adresse}</p>` : ''}
+						<p class="date">${exp.date}</p>
+						${hasDesc ? `<p class="description" style="display: none;">${exp.description}</p>
+						<button class="toggle-button">Voir plus</button>` : ''}
 					</div>
 				`;
 
 				// Accordéon
 				li.addEventListener('click', () => {
+					if (!hasDesc) return;
 					const isCollapsed = li.classList.contains("collapsed");
 
 					document.querySelectorAll(".experience").forEach(item => {
+						const d = item.querySelector(".description");
+						if (!d) return;
 						item.classList.remove("expanded");
 						item.classList.add("collapsed");
-						item.querySelector(".description").style.display = "none";
+						d.style.display = "none";
 						item.querySelector(".toggle-button").textContent = "Voir plus";
 					});
 
@@ -189,6 +197,29 @@ if (document.getElementById("experience-list")) {
 					}
 				});
 
+				list.appendChild(li);
+			});
+		});
+}
+
+// ---------- Page index.html : projets ----------
+
+if (document.getElementById("project-list")) {
+	fetch("public/data/projets.json")
+		.then(r => r.json())
+		.then(projets => {
+			const list = document.getElementById("project-list");
+			projets.forEach(p => {
+				const li = document.createElement("li");
+				li.className = "project-card reveal";
+				li.innerHTML = `
+					<h3>${p.titre}${p.statut ? `<span class="badge">${p.statut}</span>` : ""}</h3>
+					<p>${p.description}</p>
+					<ul class="tags">${p.tags.map(t => `<li>${t}</li>`).join("")}</ul>
+					<div class="links">
+						<a href="${p.lien}" target="_blank" rel="noopener noreferrer">Code</a>
+						${p.demo ? `<a href="${p.demo}" target="_blank" rel="noopener noreferrer">Voir le site</a>` : ""}
+					</div>`;
 				list.appendChild(li);
 			});
 		});

@@ -1,0 +1,43 @@
+[
+  {
+    "titre": "ZoneDeGrimpe",
+    "description": "Plateforme de gestion pour l'escalade : site web, API et application iOS native.",
+    "tags": [
+      "TypeScript",
+      "Node.js",
+      "SwiftUI"
+    ],
+    "lien": "https://github.com/VincentChaye/ZoneDeGrimpe",
+    "demo": "https://vincentchaye.github.io/ZoneDeGrimpe/"
+  },
+  {
+    "titre": "essaim",
+    "description": "Interface terminal pour concevoir et exécuter des équipes d'agents IA avec Claude Code. Outil en cours de développement.",
+    "tags": [
+      "Rust",
+      "TUI",
+      "Agents IA"
+    ],
+    "lien": "https://github.com/VincentChaye/essaim",
+    "statut": "En développement"
+  },
+  {
+    "titre": "Cleo",
+    "description": "Prise de notes de cours : transcription automatique en direct puis compte rendu structuré rédigé par Claude, dans le terminal.",
+    "tags": [
+      "Rust",
+      "Python",
+      "faster-whisper"
+    ],
+    "lien": "https://github.com/VincentChaye/cleo"
+  },
+  {
+    "titre": "RAG project",
+    "description": "Questions-réponses sur des documents : découpage, vectorisation puis recherche pour des réponses rapides et précises.",
+    "tags": [
+      "Python",
+      "RAG"
+    ],
+    "lien": "https://github.com/VincentChaye/RAG_project01"
+  }
+]
