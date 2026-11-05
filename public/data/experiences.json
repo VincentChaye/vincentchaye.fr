@@ -6,7 +6,17 @@
     "date": "septembre 2026 - en cours",
     "dateFin": "9999-12-31",
     "logo": "public/img/Logo_Thales.svg",
-    "class": "thales"
+    "class": "thales",
+    "i18n": {
+      "en": {
+        "titre": "Work-study compliance and cybersecurity engineer, Thales Alenia Space",
+        "date": "September 2026 – present"
+      },
+      "es": {
+        "titre": "Ingeniero de cumplimiento y ciberseguridad en alternancia, Thales Alenia Space",
+        "date": "septiembre 2026 – actualidad"
+      }
+    }
   },
   {
     "titre": "Alternant CNRS projet Terra Numerica",
@@ -15,7 +25,19 @@
     "date": "octobre 2023 - août 2026",
     "dateFin": "2026-08-31",
     "logo": "public/img/Logo_CNRS.png",
-    "class": "cnrs"
+    "class": "cnrs",
+    "i18n": {
+      "en": {
+        "titre": "Work-study apprentice at CNRS, Terra Numerica project",
+        "date": "October 2023 – August 2026",
+        "description": "My first role is to develop the existing mathematics and computer science workshops as web versions. I also run the workshops for all kinds of audiences."
+      },
+      "es": {
+        "titre": "Alternante en el CNRS, proyecto Terra Numerica",
+        "date": "octubre 2023 – agosto 2026",
+        "description": "Mi función es, en primer lugar, desarrollar en versión web los talleres de matemáticas e informática ya existentes. Además, dirijo los talleres para todo tipo de público."
+      }
+    }
   },
   {
     "titre": "Membre du conseil administratif et entraineur du club MER (Montagne Escalade Rochelaise)",
@@ -24,7 +46,19 @@
     "date": "septembre 2021 - juillet 2023",
     "dateFin": "2023-07-31",
     "logo": "public/img/Logo_MER.png",
-    "class": "mer"
+    "class": "mer",
+    "i18n": {
+      "en": {
+        "titre": "Board member and coach at the MER club (Montagne Escalade Rochelaise)",
+        "date": "September 2021 – July 2023",
+        "description": "During my high school years I was a board member of my club, which let me carry several projects and take part in important meetings such as the 2021 general assembly of the FFME (French Mountaineering and Climbing Federation). I earned the volunteer SAE climbing instructor qualification, which allowed me to run classes for children and adults."
+      },
+      "es": {
+        "titre": "Miembro de la junta directiva y entrenador del club MER (Montagne Escalade Rochelaise)",
+        "date": "septiembre 2021 – julio 2023",
+        "description": "Durante mis años de instituto fui miembro de la junta directiva de mi club, lo que me permitió llevar varios proyectos y participar en reuniones importantes como la asamblea general de la FFME de 2021. Obtuve el título voluntario de iniciador SAE, que me permitió dirigir clases para niños y adultos."
+      }
+    }
   },
   {
     "titre": "Animateur saisonnier centre périjeunesse",
@@ -33,6 +67,18 @@
     "date": "octobre 2021 - août 2023",
     "dateFin": "2023-08-31",
     "logo": "public/img/Logo_Centre.png",
-    "class": "centre"
+    "class": "centre",
+    "i18n": {
+      "en": {
+        "titre": "Seasonal youth leader, Périjeunesse centre",
+        "date": "October 2021 – August 2023",
+        "description": "Youth leader during school holidays thanks to my BAFA, with lifeguard qualification."
+      },
+      "es": {
+        "titre": "Monitor de temporada, centro Périjeunesse",
+        "date": "octubre 2021 – agosto 2023",
+        "description": "Monitor durante las vacaciones escolares gracias a mi BAFA, con cualificación de socorrista."
+      }
+    }
   }
 ]

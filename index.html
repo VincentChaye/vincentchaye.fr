@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-title-key="title.home">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Vincent Chaye — Alternant informatique</title>
-	<meta name="description" content="Portfolio de Vincent Chaye, alternant informatique.">
+	<title>Vincent Chaye — Élève-ingénieur cybersécurité</title>
+	<meta name="description" content="Portfolio de Vincent Chaye, élève-ingénieur en cybersécurité à l'ESIEA et alternant chez Thales Alenia Space.">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Bellefair&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
@@ -22,106 +22,112 @@
 		<div class="intro-inner">
 			<span class="intro-the">The</span>
 			<h1 class="intro-title">Vincent<br>Chaye</h1>
-			<button class="enter-btn" id="enter-btn" type="button">Entrer</button>
+			<button class="enter-btn" id="enter-btn" type="button" data-i18n="intro.enter">Entrer</button>
 		</div>
 	</div>
 
 	<header class="topbar">
-		<button class="round-btn" id="mobile-menu" type="button" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg></button>
+		<button class="round-btn" id="mobile-menu" type="button" data-i18n-attr="aria-label:aria.menu" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg></button>
 		<a class="brand" href="index.html">VINCENT CHAYE</a>
-		<a class="round-btn" href="public/download/CV-VincentChaye-2026.pdf" aria-label="Télécharger le CV" title="CV">
-			<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4">
-				<path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14" />
-			</svg>
-		</a>
+		<div class="topbar-right">
+			<div class="lang">
+				<button class="round-btn lang-btn" id="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" data-i18n-attr="aria-label:aria.lang" aria-label="Choisir la langue"><span id="lang-code">FR</span></button>
+				<ul class="lang-menu" id="lang-menu">
+					<li><button type="button" data-lang="fr">Français</button></li>
+					<li><button type="button" data-lang="en">English</button></li>
+					<li><button type="button" data-lang="es">Español</button></li>
+				</ul>
+			</div>
+			<a class="round-btn" data-cv="public/download/" href="public/download/CV-VincentChaye-2026.pdf" data-i18n-attr="aria-label:aria.cv;title:aria.cv" aria-label="Télécharger le CV" title="CV"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14" /></svg></a>
+		</div>
 		<nav class="nav-panel" id="nav-panel">
 			<ul class="nav-list">
-				<li><a href="#hero">Accueil</a></li>
-				<li><a href="#apropos">À propos</a></li>
-				<li><a href="#experiences">Expériences</a></li>
-				<li><a href="#projets">Projets</a></li>
-				<li><a href="#formation">Formation</a></li>
-				<li><a href="#competences">Compétences</a></li>
-				<li><a href="public/html/learn.html">Apprentissage</a></li>
-				<li><a href="https://vincentchaye.github.io/ZoneDeGrimpe/">Escalade</a></li>
+				<li><a href="#hero" data-i18n="nav.home">Accueil</a></li>
+				<li><a href="#apropos" data-i18n="nav.about">À propos</a></li>
+				<li><a href="#experiences" data-i18n="nav.exp">Expériences</a></li>
+				<li><a href="#projets" data-i18n="nav.projects">Projets</a></li>
+				<li><a href="#formation" data-i18n="nav.edu">Formation</a></li>
+				<li><a href="#competences" data-i18n="nav.skills">Compétences</a></li>
+				<li><a href="public/html/learn.html" data-i18n="nav.learn">Apprentissage</a></li>
+				<li><a href="https://vincentchaye.github.io/ZoneDeGrimpe/" data-i18n="nav.climb">Escalade</a></li>
 			</ul>
 		</nav>
 	</header>
 
 	<main>
 		<section class="hero" id="hero">
-			<p class="chapter reveal">Chapitre un</p>
+			<p class="chapter reveal" data-i18n="chapter.1">Chapitre un</p>
 			<h2 class="display reveal">
 				<em>Vincent</em>
 				<span>CHAYE</span>
 			</h2>
-			<p class="subtitle reveal">Élève-ingénieur cybersécurité · ESIEA<br>Alternant chez Thales Alenia Space</p>
-			<a class="text-link reveal" href="public/download/CV-VincentChaye-2026.pdf">Télécharger le CV</a>
+			<p class="subtitle reveal" data-i18n-html="hero.subtitle">Élève-ingénieur cybersécurité · ESIEA<br>Alternant chez Thales Alenia Space</p>
+			<a class="text-link reveal" data-cv="public/download/" href="public/download/CV-VincentChaye-2026.pdf" data-i18n="hero.cv">Télécharger le CV</a>
 			<div class="scroll-hint reveal" aria-hidden="true"><span></span></div>
 		</section>
 
 		<section class="about" id="apropos">
-			<p class="chapter reveal">Chapitre deux</p>
-			<h2 class="display small reveal"><em>À</em><span>PROPOS</span></h2>
-			<p class="lead reveal">Élève-ingénieur en cybersécurité à l'ESIEA (2026-2029) et alternant chez Thales Alenia Space, je suis passionné par les réseaux et par la cybersécurité, côté Blue Team comme Red Team, avec un fort appétit pour la gouvernance.</p>
-			<p class="lead reveal">Je m'entraîne sur Root-Me, Hack The Box et pwn.college, je suis membre du Sophia-Hack-Lab, et je prépare la certification Cisco CCST Cybersecurity.</p>
+			<p class="chapter reveal" data-i18n="chapter.2">Chapitre deux</p>
+			<h2 class="display small reveal"><em data-i18n="about.em">À</em><span data-i18n="about.span">PROPOS</span></h2>
+			<p class="lead reveal" data-i18n="about.p1">Élève-ingénieur en cybersécurité à l'ESIEA (2026-2029) et alternant chez Thales Alenia Space, je suis passionné par les réseaux et par la cybersécurité, côté Blue Team comme Red Team, avec un fort appétit pour la gouvernance.</p>
+			<p class="lead reveal" data-i18n="about.p2">Je m'entraîne sur Root-Me, Hack The Box et pwn.college, je suis membre du Sophia-Hack-Lab, et je prépare la certification Cisco CCST Cybersecurity.</p>
 			<ul class="facts reveal">
-				<li><b>Langues</b>Anglais (B2) · Allemand (A1)</li>
-				<li class="sport"><b>Sport</b>Escalade · Échecs · Ninja Warrior
-			<div class="video">
-				<div class="video-frame">
-					<iframe src="https://www.youtube-nocookie.com/embed/ppn174YfIXE" title="Ninja Warrior : ma participation" loading="lazy"
-						allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
-				</div>
-				<p class="video-caption">Ma participation à Ninja Warrior · 2025</p>
-			</div>
+				<li><b data-i18n="facts.lang">Langues</b><span data-i18n="facts.lang.v">Anglais (B2) · Allemand (A1)</span></li>
+				<li class="sport"><b data-i18n="facts.sport">Sport</b><span data-i18n="facts.sport.v">Escalade · Échecs · Ninja Warrior</span>
+					<div class="video">
+						<div class="video-frame">
+							<iframe src="https://www.youtube-nocookie.com/embed/ppn174YfIXE" title="Ninja Warrior : ma participation" data-i18n-attr="title:video.title" loading="lazy"
+								allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+						</div>
+						<p class="video-caption" data-i18n="video.caption">Ma participation à Ninja Warrior · 2025</p>
+					</div>
 				</li>
-				<li><b>Créatif</b>Trompette · Pâtisserie</li>
-				<li><b>Diplômes</b>BAFA · Initiateur SAE · PSC1 · Permis B</li>
+				<li><b data-i18n="facts.creative">Créatif</b><span data-i18n="facts.creative.v">Trompette · Pâtisserie</span></li>
+				<li><b data-i18n="facts.diplomas">Diplômes</b><span data-i18n="facts.diplomas.v">BAFA · Initiateur SAE · PSC1 · Permis B</span></li>
 			</ul>
 		</section>
 
 		<section class="experiences" id="experiences">
-			<p class="chapter reveal">Chapitre trois</p>
-			<h2 class="display small reveal"><em>Les</em><span>EXPÉRIENCES</span></h2>
+			<p class="chapter reveal" data-i18n="chapter.3">Chapitre trois</p>
+			<h2 class="display small reveal"><em data-i18n="exp.em">Les</em><span data-i18n="exp.span">EXPÉRIENCES</span></h2>
 			<ul id="experience-list"></ul>
 		</section>
 
 		<section class="projects" id="projets">
-			<p class="chapter reveal">Chapitre quatre</p>
-			<h2 class="display small reveal"><em>Les</em><span>PROJETS</span></h2>
+			<p class="chapter reveal" data-i18n="chapter.4">Chapitre quatre</p>
+			<h2 class="display small reveal"><em data-i18n="proj.em">Les</em><span data-i18n="proj.span">PROJETS</span></h2>
 			<ul id="project-list"></ul>
-			<a class="text-link reveal" href="https://github.com/VincentChaye?tab=repositories" target="_blank" rel="noopener">Tous mes projets sur GitHub</a>
+			<a class="text-link reveal" href="https://github.com/VincentChaye?tab=repositories" target="_blank" rel="noopener" data-i18n="proj.all">Tous mes projets sur GitHub</a>
 		</section>
 
 		<section class="formation" id="formation">
-			<p class="chapter reveal">Chapitre cinq</p>
-			<h2 class="display small reveal"><em>La</em><span>FORMATION</span></h2>
+			<p class="chapter reveal" data-i18n="chapter.5">Chapitre cinq</p>
+			<h2 class="display small reveal"><em data-i18n="edu.em">La</em><span data-i18n="edu.span">FORMATION</span></h2>
 			<ul class="timeline reveal">
-				<li><span class="when">2026 – 2029</span><b>ESIEA</b><i>Diplôme d'ingénieur, spécialité cybersécurité (alternance)</i></li>
-				<li><span class="when">2023 – 2026</span><b>IUT Nice-Sophia Antipolis</b><i>BUT Informatique, réalisation d'applications (alternance)</i></li>
-				<li><span class="when">2019 – 2023</span><b>Lycée Léonce Vieljeux, La Rochelle</b><i>Baccalauréat général, mention Bien (Maths, NSI, Maths expertes)</i></li>
+				<li><span class="when">2026 – 2029</span><b>ESIEA</b><i data-i18n="edu.esiea">Diplôme d'ingénieur, spécialité cybersécurité (alternance)</i></li>
+				<li><span class="when">2023 – 2026</span><b>IUT Nice-Sophia Antipolis</b><i data-i18n="edu.but">BUT Informatique, réalisation d'applications (alternance)</i></li>
+				<li><span class="when">2019 – 2023</span><b>Lycée Léonce Vieljeux, La Rochelle</b><i data-i18n="edu.lycee">Baccalauréat général, mention Bien (Maths, NSI, Maths expertes)</i></li>
 			</ul>
 		</section>
 
 		<section class="skills" id="competences">
-			<p class="chapter reveal">Chapitre six</p>
-			<h2 class="display small reveal"><em>Les</em><span>COMPÉTENCES</span></h2>
+			<p class="chapter reveal" data-i18n="chapter.6">Chapitre six</p>
+			<h2 class="display small reveal"><em data-i18n="skills.em">Les</em><span data-i18n="skills.span">COMPÉTENCES</span></h2>
 			<div class="skill-grid reveal">
-				<div><h3>Défense &amp; analyse</h3><p>Wireshark · Cisco Packet Tracer · Bases SIEM / SOC · Threat intelligence · OSINT · Linux (hardening) · Windows</p></div>
-				<div><h3>Audit &amp; offensif</h3><p>Utilisation courante de Kali Linux Purple avec son jeu d'outils complet, en particulier pour l'audit de points d'accès sans fil (Wi-Fi) · Nmap · Burp Suite · Hydra · Hashcat · John the Ripper · x64dbg · IDA</p></div>
-				<div><h3>Développement</h3><p>Python · Bash · Rust · C/C++ · Assembleur x86 · JavaScript (React, Express, Vue) · TypeScript · HTML/CSS</p></div>
-				<div><h3>DevSecOps &amp; IA</h3><p>CI/CD · Docker · Pipelines RAG (LangChain, Ollama)</p></div>
+				<div><h3 data-i18n="skills.def.h">Défense &amp; analyse</h3><p data-i18n="skills.def.p">Wireshark · Cisco Packet Tracer · Bases SIEM / SOC · Threat intelligence · OSINT · Linux (hardening) · Windows</p></div>
+				<div><h3 data-i18n="skills.off.h">Audit &amp; offensif</h3><p data-i18n="skills.off.p">Utilisation courante de Kali Linux Purple avec son jeu d'outils complet, en particulier pour l'audit de points d'accès sans fil (Wi-Fi) · Nmap · Burp Suite · Hydra · Hashcat · John the Ripper · x64dbg · IDA</p></div>
+				<div><h3 data-i18n="skills.dev.h">Développement</h3><p data-i18n="skills.dev.p">Python · Bash · Rust · C/C++ · Assembleur x86 · JavaScript (React, Express, Vue) · TypeScript · HTML/CSS</p></div>
+				<div><h3 data-i18n="skills.sec.h">DevSecOps &amp; IA</h3><p data-i18n="skills.sec.p">CI/CD · Docker · Pipelines RAG (LangChain, Ollama)</p></div>
 			</div>
-			<p class="chapter reveal certs">Certifications Cisco : Networking Basics · Networking Devices and Initial Configuration · Endpoint Security · CCST Cybersecurity (en cours)</p>
+			<p class="chapter reveal certs" data-i18n="skills.certs">Certifications Cisco : Networking Basics · Networking Devices and Initial Configuration · Endpoint Security · CCST Cybersecurity (en cours)</p>
 		</section>
 
 		<section class="contact" id="contact">
-			<p class="chapter reveal">Chapitre sept</p>
-			<h2 class="display small reveal"><em>Me</em><span>CONTACTER</span></h2>
+			<p class="chapter reveal" data-i18n="chapter.7">Chapitre sept</p>
+			<h2 class="display small reveal"><em data-i18n="contact.em">Me</em><span data-i18n="contact.span">CONTACTER</span></h2>
 			<ul class="contact-list reveal">
 				<li class="icon mail" role="button" tabindex="0" onclick="copyToClipboard('vincent.chaye@icloud.com', this)">
-					<span class="tooltip">Mail</span>
+					<span class="tooltip" data-i18n="tip.mail">Mail</span>
 					<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.4 6.6l-9.4 7.5L2.6 6.6C2.2 6.3 2 5.8 2 5.3V4.5C2 3.7 2.7 3 3.5 3h17c.8 0 1.5.7 1.5 1.5v.8c0 .5-.2 1-.6 1.3zM22 8.2l-10 8.1-10-8.1V18c0 .8.7 1.5 1.5 1.5h17c.8 0 1.5-.7 1.5-1.5V8.2z" /></svg>
 				</li>
 				<li class="icon linkedin" role="button" tabindex="0" onclick="window.open('https://www.linkedin.com/in/vincentchayé', '_blank')">
@@ -144,6 +150,7 @@
 		<p>&copy; 2026 Vincent Chaye</p>
 	</footer>
 
+	<script src="i18n.js"></script>
 	<script src="script.js"></script>
 	<script src="home.js"></script>
 </body>

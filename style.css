@@ -548,3 +548,22 @@ li.experience img.logo-thales { width: 150px; height: 64px; border-radius: 12px;
 .facts li.sport .video { margin: 18px auto 0; max-width: 100%; }
 .video-caption { margin: 14px 0 0; font-size: 15px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-2); }
 @media (max-width: 678px) { .facts { grid-template-columns: 1fr; } }
+
+/* ---------- Sélecteur de langue ---------- */
+
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.lang { position: relative; }
+.lang-btn { font-size: 15px; letter-spacing: 0.08em; }
+.lang-menu {
+	position: absolute; top: 58px; right: 0; margin: 0; padding: 8px 0; list-style: none; min-width: 140px;
+	background: var(--cream); color: var(--ink); border: 1px solid var(--copper); border-radius: 14px;
+	opacity: 0; visibility: hidden; transform: translateY(-8px); transition: all 0.4s var(--ease);
+}
+.lang-menu.open { opacity: 1; visibility: visible; transform: none; }
+.lang-menu button {
+	display: block; width: 100%; padding: 8px 22px; text-align: left; background: none; border: 0; cursor: pointer;
+	font-family: var(--serif); font-size: 18px; color: inherit; transition: color 0.3s, padding-left 0.4s var(--ease);
+}
+.lang-menu button:hover { color: var(--copper); padding-left: 28px; }
+.lang-menu button[aria-current="true"] { color: var(--copper); }
+.lang-menu button[aria-current="true"]::after { content: " ✓"; }

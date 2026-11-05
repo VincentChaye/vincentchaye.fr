@@ -1,13 +1,13 @@
-
+// Rendu des données (expériences, projets, apprentissage). Dépend de i18n.js (t, tr, LANG).
 
 // Fonction pour copier un texte dans le presse-papier
 function copyToClipboard(text, element) {
 	navigator.clipboard.writeText(text).then(() => {
 		const tooltip = element.querySelector('.tooltip');
 		const original = tooltip.textContent;
-		tooltip.textContent = 'Copié !';
+		tooltip.textContent = t('tip.copied');
 		setTimeout(() => {
-			tooltip.textContent = original;
+			tooltip.textContent = tooltip.dataset.i18n ? t(tooltip.dataset.i18n) : original;
 		}, 2000);
 	});
 }
@@ -29,7 +29,7 @@ async function fetchRootMeData() {
 
 function renderRootMeStats(data, zone) {
 	if (!data) {
-		zone.innerHTML = '<p class="api-error">Données Root-Me indisponibles (CORS ou réseau).</p>';
+		zone.innerHTML = `<p class="api-error">${t('rm.unavailable')}</p>`;
 		return;
 	}
 
@@ -58,16 +58,16 @@ function renderRootMeStats(data, zone) {
 			<div class="live-badge"><span class="live-dot"></span>Live</div>
 			<div class="stats-strip">
 				<div class="stat-pill">
-					<span class="stat-label">Score</span>
-					<span class="stat-value">${score} pts</span>
+					<span class="stat-label">${t('rm.score')}</span>
+					<span class="stat-value">${score} ${t('rm.pts')}</span>
 				</div>
 				<div class="stat-pill">
-					<span class="stat-label">Rang</span>
+					<span class="stat-label">${t('rm.rank')}</span>
 					<span class="stat-value">#${rang}</span>
 				</div>
 				<div class="stat-pill">
-					<span class="stat-label">Résolus</span>
-					<span class="stat-value">${solved} défis</span>
+					<span class="stat-label">${t('rm.solved')}</span>
+					<span class="stat-value">${solved} ${t('rm.challenges')}</span>
 				</div>
 			</div>
 			${catHtml ? `<div class="cat-strip">${catHtml}</div>` : ''}
@@ -77,18 +77,20 @@ function renderRootMeStats(data, zone) {
 
 function renderProgressCards(progress, zone) {
 	progress.forEach(p => {
-		const isPercent = typeof p.progress === 'string' && p.progress.includes('%');
-		const percentVal = isPercent ? parseInt(p.progress) : null;
+		const titre = tr(p, 'titre');
+		const progressTxt = tr(p, 'progress');
+		const isPercent = typeof progressTxt === 'string' && progressTxt.includes('%');
+		const percentVal = isPercent ? parseInt(progressTxt) : null;
 
 		const progressHtml = isPercent
 			? `<div class="progress-bar-wrap">
 					<div class="progress-bar-fill" style="width: ${percentVal}%"></div>
 				</div>
-				<span class="progress-label">${p.progress}</span>`
-			: `<span class="progress-text">${p.progress}</span>`;
+				<span class="progress-label">${progressTxt}</span>`
+			: `<span class="progress-text">${progressTxt}</span>`;
 
 		const badgeHtml = p.badgeId
-			? `<div class="credly-badge-wrap" data-badge-id="${p.badgeId}" data-badge-titre="${p.titre}">
+			? `<div class="credly-badge-wrap" data-badge-id="${p.badgeId}" data-badge-titre="${titre}">
 					<div class="credly-badge-loading"></div>
 				</div>`
 			: '';
@@ -98,21 +100,21 @@ function renderProgressCards(progress, zone) {
 		div.innerHTML = `
 			<div class="progress-card-inner ${p.badgeId ? 'has-badge' : ''}">
 				<div class="progress-card-header">
-					<img src="${p.image}" alt="${p.titre}" class="progress-card-img" />
+					<img src="${p.image}" alt="${titre}" class="progress-card-img" />
 					<div>
-						<h3>${p.titre}</h3>
-						<p class="progress-date">${p.date}</p>
+						<h3>${titre}</h3>
+						<p class="progress-date">${tr(p, 'date')}</p>
 					</div>
 				</div>
 				${progressHtml}
-				<p class="progress-desc">${p.description}</p>
+				<p class="progress-desc">${tr(p, 'description')}</p>
 				${badgeHtml}
 			</div>
 		`;
 		zone.appendChild(div);
 
 		if (p.badgeId) {
-			loadCredlyBadge(div.querySelector('.credly-badge-wrap'), p.badgeId, p.titre);
+			loadCredlyBadge(div.querySelector('.credly-badge-wrap'), p.badgeId, titre);
 		}
 	});
 }
@@ -128,12 +130,12 @@ async function loadCredlyBadge(wrap, badgeId, titre) {
 		if (!imageUrl) throw new Error('no image');
 		wrap.innerHTML = `
 			<a href="https://www.credly.com/badges/${badgeId}" target="_blank" rel="noopener noreferrer" class="credly-badge-img-link">
-				<img src="${imageUrl}" alt="Badge Credly : ${titre}" class="credly-badge-img" />
+				<img src="${imageUrl}" alt="${t('credly.alt')}${titre}" class="credly-badge-img" />
 			</a>`;
 	} catch {
 		wrap.innerHTML = `
 			<a href="https://www.credly.com/badges/${badgeId}" target="_blank" rel="noopener noreferrer" class="credly-badge-link">
-				Voir le badge Credly ↗
+				${t('credly.view')}
 			</a>`;
 	}
 }
@@ -141,196 +143,185 @@ async function loadCredlyBadge(wrap, badgeId, titre) {
 
 // ---------- Page index.html : expériences professionnelles ----------
 
-
 if (document.getElementById("experience-list")) {
+	let experiences = [];
+
+	function renderExperiences(instant) {
+		const list = document.getElementById("experience-list");
+		list.innerHTML = "";
+
+		experiences.forEach(exp => {
+			const li = document.createElement("li");
+			li.className = `experience ${exp.class} collapsed${instant ? " in" : ""}`;
+
+			const desc = tr(exp, "description");
+			const hasDesc = !!desc;
+			const titre = tr(exp, "titre");
+			const visual = exp.logo
+				? `<img src="${exp.logo}" alt="Logo ${exp.class}" class="logo-${exp.class}">`
+				: `<span class="monogram" aria-hidden="true">${(exp.adresse || titre).split(' ')[0].slice(0, 2).toUpperCase()}</span>`;
+
+			li.innerHTML = `
+				${visual}
+				<div class="experience-text">
+					<h2>${titre}</h2>
+					${exp.adresse ? `<p class="adresse">${exp.adresse}</p>` : ''}
+					<p class="date">${tr(exp, "date")}</p>
+					${hasDesc ? `<p class="description" style="display: none;">${desc}</p>
+					<button class="toggle-button">${t('exp.more')}</button>` : ''}
+				</div>
+			`;
+
+			// Accordéon
+			li.addEventListener('click', () => {
+				if (!hasDesc) return;
+				const isCollapsed = li.classList.contains("collapsed");
+
+				document.querySelectorAll(".experience").forEach(item => {
+					const d = item.querySelector(".description");
+					if (!d) return;
+					item.classList.remove("expanded");
+					item.classList.add("collapsed");
+					d.style.display = "none";
+					item.querySelector(".toggle-button").textContent = t('exp.more');
+				});
+
+				if (isCollapsed) {
+					li.classList.remove("collapsed");
+					li.classList.add("expanded");
+					li.querySelector(".description").style.display = "block";
+					li.querySelector(".toggle-button").textContent = t('exp.less');
+				}
+			});
+
+			list.appendChild(li);
+		});
+	}
+
 	fetch("public/data/experiences.json")
 		.then(response => response.json())
 		.then(data => {
-			const list = document.getElementById("experience-list");
-
-			// Trier : d'abord "en cours", puis par date décroissante
+			// Trier : d'abord "en cours", puis par date décroissante (tri stable)
 			data.sort((a, b) => {
 				if (a.dateFin === "en cours") return -1;
 				if (b.dateFin === "en cours") return 1;
 				return new Date(b.dateFin) - new Date(a.dateFin);
 			});
-
-			data.forEach(exp => {
-				const li = document.createElement("li");
-				li.className = `experience ${exp.class} collapsed`;
-
-				const hasDesc = !!exp.description;
-				const visual = exp.logo
-					? `<img src="${exp.logo}" alt="Logo ${exp.class}" class="logo-${exp.class}">`
-					: `<span class="monogram" aria-hidden="true">${(exp.adresse || exp.titre).split(' ')[0].slice(0, 2).toUpperCase()}</span>`;
-
-				li.innerHTML = `
-					${visual}
-					<div class="experience-text">
-						<h2>${exp.titre}</h2>
-						${exp.adresse ? `<p class="adresse">${exp.adresse}</p>` : ''}
-						<p class="date">${exp.date}</p>
-						${hasDesc ? `<p class="description" style="display: none;">${exp.description}</p>
-						<button class="toggle-button">Voir plus</button>` : ''}
-					</div>
-				`;
-
-				// Accordéon
-				li.addEventListener('click', () => {
-					if (!hasDesc) return;
-					const isCollapsed = li.classList.contains("collapsed");
-
-					document.querySelectorAll(".experience").forEach(item => {
-						const d = item.querySelector(".description");
-						if (!d) return;
-						item.classList.remove("expanded");
-						item.classList.add("collapsed");
-						d.style.display = "none";
-						item.querySelector(".toggle-button").textContent = "Voir plus";
-					});
-
-					if (isCollapsed) {
-						li.classList.remove("collapsed");
-						li.classList.add("expanded");
-						li.querySelector(".description").style.display = "block";
-						li.querySelector(".toggle-button").textContent = "Voir moins";
-					}
-				});
-
-				list.appendChild(li);
-			});
+			experiences = data;
+			renderExperiences(false);
 		});
+
+	document.addEventListener('langchange', () => renderExperiences(true));
 }
 
 // ---------- Page index.html : projets ----------
 
 if (document.getElementById("project-list")) {
+	let projets = [];
+
+	function renderProjects(instant) {
+		const list = document.getElementById("project-list");
+		list.innerHTML = "";
+		projets.forEach(p => {
+			const li = document.createElement("li");
+			li.className = `project-card reveal${instant ? " in" : ""}`;
+			const statut = tr(p, "statut");
+			li.innerHTML = `
+				<h3>${p.titre}${statut ? `<span class="badge">${statut}</span>` : ""}</h3>
+				<p>${tr(p, "description")}</p>
+				<ul class="tags">${p.tags.map(tag => `<li>${tag}</li>`).join("")}</ul>
+				<div class="links">
+					<a href="${p.lien}" target="_blank" rel="noopener noreferrer">${t('proj.code')}</a>
+					${p.demo ? `<a href="${p.demo}" target="_blank" rel="noopener noreferrer">${t('proj.site')}</a>` : ""}
+				</div>`;
+			list.appendChild(li);
+		});
+	}
+
 	fetch("public/data/projets.json")
 		.then(r => r.json())
-		.then(projets => {
-			const list = document.getElementById("project-list");
-			projets.forEach(p => {
-				const li = document.createElement("li");
-				li.className = "project-card reveal";
-				li.innerHTML = `
-					<h3>${p.titre}${p.statut ? `<span class="badge">${p.statut}</span>` : ""}</h3>
-					<p>${p.description}</p>
-					<ul class="tags">${p.tags.map(t => `<li>${t}</li>`).join("")}</ul>
-					<div class="links">
-						<a href="${p.lien}" target="_blank" rel="noopener noreferrer">Code</a>
-						${p.demo ? `<a href="${p.demo}" target="_blank" rel="noopener noreferrer">Voir le site</a>` : ""}
-					</div>`;
-				list.appendChild(li);
-			});
+		.then(data => {
+			projets = data;
+			renderProjects(false);
 		});
+
+	document.addEventListener('langchange', () => renderProjects(true));
 }
 
 // ---------- Page learn.html : plateformes + avancement ----------
 
-
 if (document.getElementById("learn-list")) {
+	let sites = [];
+	let progress = [];
+	// Pré-charger les données Root-Me en parallèle
+	const rootMePromise = fetchRootMeData();
+
+	function renderLearn(instant) {
+		const list = document.getElementById("learn-list");
+		list.innerHTML = "";
+
+		for (const site of sites) {
+			const li = document.createElement("li");
+			li.className = `experience collapsed platform-${site.id}${instant ? " in" : ""}`;
+
+			// La classe CSS du statut reste basée sur la valeur française d'origine.
+			li.innerHTML = `
+				<img src="${site.image}" alt="${site.titre}" class="fixed-img" />
+				<div class="experience-text">
+					<a href="${site.lien}" target="_blank" rel="noopener noreferrer">
+						<h2>${site.titre}</h2>
+					</a>
+					<p>${tr(site, 'description')}</p>
+					<span class="statut-badge statut-${site.statut.toLowerCase().replace(' ', '-')}">${tr(site, 'statut')}</span>
+					<button class="toggle-button">${t('exp.more')}</button>
+					<div class="progress-zone" style="display: none;"></div>
+				</div>
+			`;
+
+			li.addEventListener("click", async () => {
+				const alreadyOpen = li.classList.contains("expanded");
+
+				document.querySelectorAll(".experience").forEach(other => {
+					other.classList.remove("expanded");
+					other.classList.add("collapsed");
+					const zone = other.querySelector(".progress-zone");
+					if (zone) zone.style.display = "none";
+					const btn = other.querySelector(".toggle-button");
+					if (btn) btn.textContent = t('exp.more');
+				});
+
+				if (!alreadyOpen) {
+					li.classList.remove("collapsed");
+					li.classList.add("expanded");
+					li.querySelector(".toggle-button").textContent = t('exp.less');
+
+					const zone = li.querySelector(".progress-zone");
+					zone.innerHTML = "";
+					zone.style.display = "block";
+
+					if (site.id === "rootme") {
+						zone.innerHTML = '<div class="loading-spinner"></div>';
+						const rmData = await rootMePromise;
+						zone.innerHTML = "";
+						renderRootMeStats(rmData, zone);
+					} else {
+						renderProgressCards(progress.filter(p => p.siteId === site.id), zone);
+					}
+				}
+			});
+
+			list.appendChild(li);
+		}
+	}
+
 	Promise.all([
 		fetch("../data/learnSites.json").then(res => res.json()),
 		fetch("../data/learnProgress.json").then(res => res.json())
-	])
-		.then(async ([sites, progress]) => {
-			const list = document.getElementById("learn-list");
-
-			// Pré-charger les données Root-Me en parallèle
-			const rootMePromise = fetchRootMeData();
-
-			for (const site of sites) {
-				const li = document.createElement("li");
-				li.className = "experience collapsed";
-
-				const platformClass = `platform-${site.id}`;
-				li.classList.add(platformClass);
-
-				li.innerHTML = `
-					<img src="${site.image}" alt="${site.titre}" class="fixed-img" />
-					<div class="experience-text">
-						<a href="${site.lien}" target="_blank" rel="noopener noreferrer">
-							<h2>${site.titre}</h2>
-						</a>
-						<p>${site.description}</p>
-						<span class="statut-badge statut-${site.statut.toLowerCase().replace(' ', '-')}">${site.statut}</span>
-						<button class="toggle-button">Voir plus</button>
-						<div class="progress-zone" style="display: none;"></div>
-					</div>
-				`;
-
-				li.addEventListener("click", async () => {
-					const alreadyOpen = li.classList.contains("expanded");
-
-					document.querySelectorAll(".experience").forEach(other => {
-						other.classList.remove("expanded");
-						other.classList.add("collapsed");
-						const zone = other.querySelector(".progress-zone");
-						if (zone) zone.style.display = "none";
-						const btn = other.querySelector(".toggle-button");
-						if (btn) btn.textContent = "Voir plus";
-					});
-
-					if (!alreadyOpen) {
-						li.classList.remove("collapsed");
-						li.classList.add("expanded");
-						li.querySelector(".toggle-button").textContent = "Voir moins";
-
-						const zone = li.querySelector(".progress-zone");
-						zone.innerHTML = "";
-						zone.style.display = "block";
-
-						if (site.id === "rootme") {
-							// Afficher le spinner pendant le chargement
-							zone.innerHTML = '<div class="loading-spinner"></div>';
-							const rmData = await rootMePromise;
-							zone.innerHTML = "";
-							renderRootMeStats(rmData, zone);
-						} else {
-							const related = progress.filter(p => p.siteId === site.id);
-							renderProgressCards(related, zone);
-						}
-					}
-				});
-
-				list.appendChild(li);
-			}
-		});
-}
-
-
-// ---------- Mobile menu toggle ----------
-
-document.addEventListener("DOMContentLoaded", function () {
-	const toggle = document.getElementById("mobile-menu");
-	const navList = document.querySelector(".nav-list");
-
-	toggle.addEventListener("click", () => {
-		navList.classList.toggle("active");
+	]).then(([s, p]) => {
+		sites = s;
+		progress = p;
+		renderLearn(false);
 	});
-});
 
-function mergeAsideIconsOnMobile() {
-	const isMobile = window.innerWidth <= 678;
-	const leftAside = document.querySelector('.left-aside ul.wrapper');
-	const rightAside = document.querySelector('.right-aside ul.wrapper');
-
-	if (!leftAside || !rightAside) return;
-
-	if (isMobile && leftAside.children.length > 0) {
-		while (leftAside.children.length > 0) {
-			rightAside.appendChild(leftAside.children[0]);
-		}
-		document.querySelector('.left-aside').style.display = 'none';
-	}
-
-	if (!isMobile && leftAside.children.length === 0) {
-		const allIcons = [...rightAside.querySelectorAll('li.icon')];
-		const leftIcons = allIcons.filter(icon => icon.classList.contains('mail') || icon.classList.contains('tel'));
-		leftIcons.forEach(icon => leftAside.appendChild(icon));
-		document.querySelector('.left-aside').style.display = '';
-	}
+	document.addEventListener('langchange', () => renderLearn(true));
 }
-
-window.addEventListener('DOMContentLoaded', mergeAsideIconsOnMobile);
-window.addEventListener('resize', mergeAsideIconsOnMobile);

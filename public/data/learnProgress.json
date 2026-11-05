@@ -5,7 +5,17 @@
     "image": "../img/as86.png",
     "progress": "100%",
     "description": "Les ordinateurs gèrent une incroyable quantité de programmes. Ce dojo plonge dans les profondeurs de l'informatique.",
-    "date": "11 septembre 2025"
+    "date": "11 septembre 2025",
+    "i18n": {
+      "en": {
+        "description": "Computers run an incredible number of programs. This dojo dives into the depths of computing.",
+        "date": "11 September 2025"
+      },
+      "es": {
+        "description": "Los ordenadores ejecutan una cantidad increíble de programas. Este dojo profundiza en las entrañas de la informática.",
+        "date": "11 de septiembre de 2025"
+      }
+    }
   },
   {
     "siteId": "pwncollege",
@@ -13,7 +23,17 @@
     "image": "../img/linux.png",
     "progress": "100%",
     "description": "Apprentissage de la ligne de commande Linux et concepts fondamentaux.",
-    "date": "12 mai 2025"
+    "date": "12 mai 2025",
+    "i18n": {
+      "en": {
+        "description": "Learning the Linux command line and core concepts.",
+        "date": "12 May 2025"
+      },
+      "es": {
+        "description": "Aprendizaje de la línea de comandos de Linux y conceptos fundamentales.",
+        "date": "12 de mayo de 2025"
+      }
+    }
   },
   {
     "siteId": "pwncollege",
@@ -21,7 +41,17 @@
     "image": "../img/linux.png",
     "progress": "5%",
     "description": "Jouer avec des programmes et interagir avec des scripts.",
-    "date": "12 juin 2025"
+    "date": "12 juin 2025",
+    "i18n": {
+      "en": {
+        "description": "Playing with programs and interacting with scripts.",
+        "date": "12 June 2025"
+      },
+      "es": {
+        "description": "Jugar con programas e interactuar con scripts.",
+        "date": "12 de junio de 2025"
+      }
+    }
   },
   {
     "siteId": "rootme",
@@ -29,7 +59,20 @@
     "image": "../img/linux.png",
     "progress": "615 points",
     "description": "Différents challenges de cybersécurité sur la plateforme RootMe.",
-    "date": "en cours..."
+    "date": "en cours...",
+    "i18n": {
+      "en": {
+        "description": "Various cybersecurity challenges on the RootMe platform.",
+        "date": "in progress...",
+        "progress": "615 points"
+      },
+      "es": {
+        "titre": "Desafíos",
+        "description": "Diversos desafíos de ciberseguridad en la plataforma RootMe.",
+        "date": "en curso...",
+        "progress": "615 puntos"
+      }
+    }
   },
   {
     "siteId": "ciscoAcademy",
@@ -38,7 +81,18 @@
     "progress": "100%",
     "description": "Certificat Introduction à la Cybersécurité",
     "date": "4 juillet 2025",
-    "badgeId": "1565b979-a6fe-4d37-9481-4a44409180e1"
+    "badgeId": "1565b979-a6fe-4d37-9481-4a44409180e1",
+    "i18n": {
+      "en": {
+        "description": "Introduction to Cybersecurity certificate",
+        "date": "4 July 2025"
+      },
+      "es": {
+        "titre": "Introducción a la ciberseguridad",
+        "description": "Certificado de Introducción a la ciberseguridad",
+        "date": "4 de julio de 2025"
+      }
+    }
   },
   {
     "siteId": "ciscoAcademy",
@@ -47,7 +101,19 @@
     "progress": "100%",
     "description": "Commencez à apprendre les bases des réseaux informatiques et découvrez le fonctionnement des réseaux.",
     "date": "18 juillet 2025",
-    "badgeId": "d715dd3a-ddd4-4f9a-ab79-e7f5aa60d4aa"
+    "badgeId": "d715dd3a-ddd4-4f9a-ab79-e7f5aa60d4aa",
+    "i18n": {
+      "en": {
+        "titre": "Networking Basics",
+        "description": "Start learning the basics of computer networking and discover how networks work.",
+        "date": "18 July 2025"
+      },
+      "es": {
+        "titre": "Fundamentos de redes",
+        "description": "Empieza a aprender los fundamentos de las redes informáticas y descubre cómo funcionan.",
+        "date": "18 de julio de 2025"
+      }
+    }
   },
   {
     "siteId": "ciscoAcademy",
@@ -56,7 +122,19 @@
     "progress": "100%",
     "description": "Apprenez à identifier les composants matériels d'un réseau et à configurer des périphériques réseau de base.",
     "date": "en cours...",
-    "badgeId": "c4d80870-5b8c-4fd0-ac51-82a51735cdf6"
+    "badgeId": "c4d80870-5b8c-4fd0-ac51-82a51735cdf6",
+    "i18n": {
+      "en": {
+        "titre": "Networking Devices and Initial Configuration",
+        "description": "Learn to identify the hardware components of a network and to configure basic network devices.",
+        "date": "in progress..."
+      },
+      "es": {
+        "titre": "Dispositivos de red y configuración inicial",
+        "description": "Aprende a identificar los componentes de hardware de una red y a configurar dispositivos de red básicos.",
+        "date": "en curso..."
+      }
+    }
   },
   {
     "siteId": "ciscoAcademy",
@@ -65,6 +143,18 @@
     "progress": "20%",
     "description": "Découvrez comment surveiller et sécuriser votre réseau et évaluer les alertes de sécurité.",
     "date": "en cours...",
-    "badgeId": "6736318b-243e-4840-b20a-6d1e5e728fc9"
+    "badgeId": "6736318b-243e-4840-b20a-6d1e5e728fc9",
+    "i18n": {
+      "en": {
+        "titre": "Network Defense",
+        "description": "Discover how to monitor and secure your network and assess security alerts.",
+        "date": "in progress..."
+      },
+      "es": {
+        "titre": "Defensa de la red",
+        "description": "Descubre cómo supervisar y proteger tu red y evaluar las alertas de seguridad.",
+        "date": "en curso..."
+      }
+    }
   }
 ]

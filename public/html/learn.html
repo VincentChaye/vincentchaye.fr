@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-title-key="title.learn">
 
 <head>
 	<meta charset="UTF-8">
@@ -18,27 +18,33 @@
 	<div class="grain" aria-hidden="true"></div>
 
 	<header class="topbar">
-		<button class="round-btn" id="mobile-menu" type="button" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg></button>
+		<button class="round-btn" id="mobile-menu" type="button" data-i18n-attr="aria-label:aria.menu" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg></button>
 		<a class="brand" href="../../index.html">VINCENT CHAYE</a>
-		<a class="round-btn" href="../download/CV-VincentChaye-2026.pdf" aria-label="Télécharger le CV" title="CV">
-			<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4">
-				<path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14" />
-			</svg>
-		</a>
+		<div class="topbar-right">
+			<div class="lang">
+				<button class="round-btn lang-btn" id="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" data-i18n-attr="aria-label:aria.lang" aria-label="Choisir la langue"><span id="lang-code">FR</span></button>
+				<ul class="lang-menu" id="lang-menu">
+					<li><button type="button" data-lang="fr">Français</button></li>
+					<li><button type="button" data-lang="en">English</button></li>
+					<li><button type="button" data-lang="es">Español</button></li>
+				</ul>
+			</div>
+			<a class="round-btn" data-cv="../download/" href="../download/CV-VincentChaye-2026.pdf" data-i18n-attr="aria-label:aria.cv;title:aria.cv" aria-label="Télécharger le CV" title="CV"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14" /></svg></a>
+		</div>
 		<nav class="nav-panel" id="nav-panel">
 			<ul class="nav-list">
-				<li><a href="../../index.html">Accueil</a></li>
-				<li><a href="learn.html">Apprentissage</a></li>
-				<li><a href="https://vincentchaye.github.io/ZoneDeGrimpe/">Escalade</a></li>
+				<li><a href="../../index.html" data-i18n="nav.home">Accueil</a></li>
+				<li><a href="learn.html" data-i18n="nav.learn">Apprentissage</a></li>
+				<li><a href="https://vincentchaye.github.io/ZoneDeGrimpe/" data-i18n="nav.climb">Escalade</a></li>
 			</ul>
 		</nav>
 	</header>
 
 	<main>
 		<section class="hero short">
-			<p class="chapter reveal">Chapitre deux</p>
-			<h2 class="display reveal"><em>L'</em><span>APPRENTISSAGE</span></h2>
-			<p class="subtitle reveal">En cours…</p>
+			<p class="chapter reveal" data-i18n="chapter.2">Chapitre deux</p>
+			<h2 class="display reveal"><em data-i18n="learn.em">L'</em><span data-i18n="learn.span">APPRENTISSAGE</span></h2>
+			<p class="subtitle reveal" data-i18n="learn.subtitle">En cours…</p>
 		</section>
 
 		<section class="experiences learn" id="learn">
@@ -46,11 +52,11 @@
 		</section>
 
 		<section class="contact" id="contact">
-			<p class="chapter reveal">Contact</p>
-			<h2 class="display small reveal"><em>Me</em><span>CONTACTER</span></h2>
+			<p class="chapter reveal" data-i18n="chapter.contact">Contact</p>
+			<h2 class="display small reveal"><em data-i18n="contact.em">Me</em><span data-i18n="contact.span">CONTACTER</span></h2>
 			<ul class="contact-list reveal">
 				<li class="icon mail" role="button" tabindex="0" onclick="copyToClipboard('vincent.chaye@icloud.com', this)">
-					<span class="tooltip">Mail</span>
+					<span class="tooltip" data-i18n="tip.mail">Mail</span>
 					<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.4 6.6l-9.4 7.5L2.6 6.6C2.2 6.3 2 5.8 2 5.3V4.5C2 3.7 2.7 3 3.5 3h17c.8 0 1.5.7 1.5 1.5v.8c0 .5-.2 1-.6 1.3zM22 8.2l-10 8.1-10-8.1V18c0 .8.7 1.5 1.5 1.5h17c.8 0 1.5-.7 1.5-1.5V8.2z" /></svg>
 				</li>
 				<li class="icon linkedin" role="button" tabindex="0" onclick="window.open('https://www.linkedin.com/in/vincentchayé', '_blank')">
@@ -73,6 +79,7 @@
 		<p>&copy; 2026 Vincent Chaye</p>
 	</footer>
 
+	<script src="../../i18n.js"></script>
 	<script src="../../script.js"></script>
 	<script src="../../home.js"></script>
 </body>

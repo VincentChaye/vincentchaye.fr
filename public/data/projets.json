@@ -8,7 +8,15 @@
       "SwiftUI"
     ],
     "lien": "https://github.com/VincentChaye/ZoneDeGrimpe",
-    "demo": "https://vincentchaye.github.io/ZoneDeGrimpe/"
+    "demo": "https://vincentchaye.github.io/ZoneDeGrimpe/",
+    "i18n": {
+      "en": {
+        "description": "Climbing management platform: website, API and native iOS app."
+      },
+      "es": {
+        "description": "Plataforma de gestión para la escalada: sitio web, API y aplicación iOS nativa."
+      }
+    }
   },
   {
     "titre": "essaim",
@@ -19,7 +27,17 @@
       "Agents IA"
     ],
     "lien": "https://github.com/VincentChaye/essaim",
-    "statut": "En développement"
+    "statut": "En développement",
+    "i18n": {
+      "en": {
+        "description": "Terminal interface to design and run teams of AI agents with Claude Code. Tool under development.",
+        "statut": "In development"
+      },
+      "es": {
+        "description": "Interfaz de terminal para diseñar y ejecutar equipos de agentes de IA con Claude Code. Herramienta en desarrollo.",
+        "statut": "En desarrollo"
+      }
+    }
   },
   {
     "titre": "Cleo",
@@ -29,7 +47,15 @@
       "Python",
       "faster-whisper"
     ],
-    "lien": "https://github.com/VincentChaye/cleo"
+    "lien": "https://github.com/VincentChaye/cleo",
+    "i18n": {
+      "en": {
+        "description": "Lecture note-taking: live automatic transcription followed by a structured summary written by Claude, in the terminal."
+      },
+      "es": {
+        "description": "Toma de apuntes de clase: transcripción automática en directo y resumen estructurado redactado por Claude, en el terminal."
+      }
+    }
   },
   {
     "titre": "RAG project",
@@ -38,6 +64,14 @@
       "Python",
       "RAG"
     ],
-    "lien": "https://github.com/VincentChaye/RAG_project01"
+    "lien": "https://github.com/VincentChaye/RAG_project01",
+    "i18n": {
+      "en": {
+        "description": "Question answering over documents: chunking, vectorisation and retrieval for fast, accurate answers."
+      },
+      "es": {
+        "description": "Preguntas y respuestas sobre documentos: fragmentación, vectorización y búsqueda para respuestas rápidas y precisas."
+      }
+    }
   }
 ]

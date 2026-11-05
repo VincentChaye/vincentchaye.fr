@@ -1,18 +1,39 @@
 [
-  {"id": "ciscoAcademy",
+  {
+    "id": "ciscoAcademy",
     "titre": "Cisco Networking Academy",
     "image": "../img/cisco.png",
     "lien": "https://www.credly.com/users/vincent-chaye",
     "description": "Plateforme d'apprentissage en ligne par cisco",
-    "statut": "En cours"
-},
-{
+    "statut": "En cours",
+    "i18n": {
+      "en": {
+        "description": "Online learning platform by Cisco",
+        "statut": "In progress"
+      },
+      "es": {
+        "description": "Plataforma de aprendizaje en línea de Cisco",
+        "statut": "En curso"
+      }
+    }
+  },
+  {
     "id": "pwncollege",
     "titre": "pwn.college",
     "image": "../img/pwn.college.png",
     "lien": "https://pwn.college/hacker/105994",
     "description": "Université de cybersécurité interactive créée par Arizona State. Accessible gratuitement, très orientée exploitation système et reverse engineering.",
-    "statut": "En cours"
+    "statut": "En cours",
+    "i18n": {
+      "en": {
+        "description": "Interactive cybersecurity university created by Arizona State. Free to use, strongly focused on system exploitation and reverse engineering.",
+        "statut": "In progress"
+      },
+      "es": {
+        "description": "Universidad interactiva de ciberseguridad creada por Arizona State. De acceso gratuito, muy orientada a la explotación de sistemas y la ingeniería inversa.",
+        "statut": "En curso"
+      }
+    }
   },
   {
     "id": "rootme",
@@ -20,6 +41,16 @@
     "image": "../img/rootme.jpg",
     "lien": "https://www.root-me.org/natil?lang=fr",
     "description": "Plateforme d'entraînement aux défis de cybersécurité. Accès à des challenges en ligne dans plusieurs domaines (web, crypto, reverse, etc.).",
-    "statut": "En cours"
+    "statut": "En cours",
+    "i18n": {
+      "en": {
+        "description": "Cybersecurity challenge training platform. Access to online challenges across several domains (web, crypto, reverse, etc.).",
+        "statut": "In progress"
+      },
+      "es": {
+        "description": "Plataforma de entrenamiento con retos de ciberseguridad. Acceso a desafíos en línea en varios ámbitos (web, cripto, ingeniería inversa, etc.).",
+        "statut": "En curso"
+      }
+    }
   }
 ]
