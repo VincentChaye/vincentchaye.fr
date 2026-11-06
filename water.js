@@ -98,12 +98,12 @@
 		// Halo clair autour de la souris, teinté eau.
 		vec2 dm = (vUv - uMouse) * vec2(uAspect, 1.0);
 		float g = exp(-dot(dm, dm) / (2.0 * 0.2 * 0.2)) * uGlow;
-		col *= 1.0 + g * 0.8;
-		col += g * vec3(0.045, 0.075, 0.095);
+		col *= 1.0 + g * 0.22;
+		col += g * vec3(0.008, 0.014, 0.018);
 
 		// Légères variations de luminosité selon la hauteur de l'eau.
-		col *= 1.0 + h * 0.5;
-		col += vec3(0.85, 0.95, 1.0) * (spec * 0.55 + sheen * 0.2 * slope);
+		col *= 1.0 + h * 0.25;
+		col += vec3(0.85, 0.95, 1.0) * (spec * 0.35 + sheen * 0.12 * slope);
 
 		o = vec4(col, 1.0);
 	}`;
